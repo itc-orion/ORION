@@ -1,0 +1,1793 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "test de conecion e interacion  con envio y optencion de datos",
+    "version": "1.1.5",
+    "title": "Orion",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "16680189@cuautla.tecnm.mx"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "127.0.0.1:80",
+  "basePath": "/Orion",
+  "tags": [
+    {
+      "name": "All",
+      "description": "CRUD de semaforo"
+    },
+    {
+      "name": "Semaforo",
+      "description": "CRUD de datos del semaforo"
+    },
+    {
+      "name": "Horario",
+      "description": "CRUD de horario del semaforo"
+    },
+    {
+      "name": "Rango",
+      "description": "CRUD de rango del semaforo"
+    },
+    {
+      "name": "Tiempo verde",
+      "description": "CRUD de tiempo del verde en el semaforo"
+    },
+    {
+      "name": "Tiempo amarillo",
+      "description": "CRUD de tiempo del amarillo en el semaforo"
+    },
+    {
+      "name": "Tiempo rojo",
+      "description": "CRUD de tiempo del rojo en el semaforo"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/All/Show": {
+      "get": {
+        "tags": [
+          "All"
+        ],
+        "summary": "ingresar los datos generales del semaforo",
+        "description": "crea y verifica la existencia de un semaforo nuevo",
+        "operationId": "Sall",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_all"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/All/Create": {
+      "post": {
+        "tags": [
+          "All"
+        ],
+        "summary": "ingresar los datos generales del semaforo",
+        "description": "crea y verifica la existencia de un semaforo nuevo",
+        "operationId": "Call",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan nuevos datos de un semaforo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_all"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/All/{allId}": {
+      "get": {
+        "tags": [
+          "All"
+        ],
+        "summary": "imprime los datos de un semaforo espesifico",
+        "description": "se imprimen los datos del semaforo deseado",
+        "operationId": "Rall",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "allId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra un semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_all"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "All"
+        ],
+        "summary": "actualizacion de los datos de un semaforo",
+        "description": "se actualizan los datos del semaforo deseado",
+        "operationId": "Uall",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "allId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan los datos deseados de un semaforo selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_all"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se actualiza un semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "All"
+        ],
+        "summary": "eliminacion los datos de un semaforo",
+        "description": "se eliminan los datos del semaforo deseado",
+        "operationId": "Dall",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "allId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina un semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Semaforo/Show": {
+      "get": {
+        "tags": [
+          "Semaforo"
+        ],
+        "summary": "ingresar los datos generales del semaforo",
+        "description": "crea y verifica la existencia de un semaforo nuevo",
+        "operationId": "Ssemaforo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_semaforo"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Semaforo/Create": {
+      "post": {
+        "tags": [
+          "Semaforo"
+        ],
+        "summary": "ingresar los datos generales del semaforo",
+        "description": "crea y verifica la existencia de un semaforo nuevo",
+        "operationId": "Csemaforo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan nuevos datos de un semaforo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_semaforo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Semaforo/{semId}": {
+      "get": {
+        "tags": [
+          "Semaforo"
+        ],
+        "summary": "imprime los datos de un semaforo espesifico",
+        "description": "se imprimen los datos del semaforo deseado",
+        "operationId": "Rsemaforo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "semId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra un semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_semaforo"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "Semaforo"
+        ],
+        "summary": "actualizacion de los datos de un semaforo",
+        "description": "se actualizan los datos del semaforo deseado",
+        "operationId": "Usemaforo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "semId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan los datos deseados de un semaforo selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_semaforo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se actualiza un semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "Semaforo"
+        ],
+        "summary": "eliminacion los datos de un semaforo",
+        "description": "se eliminan los datos del semaforo deseado",
+        "operationId": "Dsemaforo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "semId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina un semaforo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Horario/Show": {
+      "get": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "ingresar el horario de un semaforo",
+        "description": "crea y verifica la existencia de un horario nuevo",
+        "operationId": "Shorario",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo horario",
+            "schema": {
+              "$ref": "#/definitions/Response_horario"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Horario/Create": {
+      "post": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "ingresar el horario de un semaforo",
+        "description": "crea y verifica la existencia de un horario nuevo",
+        "operationId": "Chorario",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan nuevos datos de un horario",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_horario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo horario",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Horario/{horId}": {
+      "get": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "imprime  un horario espesifico",
+        "description": "se imprimen los datos del horario deseado",
+        "operationId": "Rhorario",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "horId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra un horario",
+            "schema": {
+              "$ref": "#/definitions/Response_horario"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "actualizacion el horario",
+        "description": "se actualizan los datos del horario deseado",
+        "operationId": "Uhorario",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "horId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan los datos deseados de un horario selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_horario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se actualiza un horario",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "Horario"
+        ],
+        "summary": "eliminacion de horario",
+        "description": "se eliminan los datos del horario deseado",
+        "operationId": "Dhorario",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "horId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina un horario",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Rango/Show": {
+      "get": {
+        "tags": [
+          "Rango"
+        ],
+        "summary": "ingresar el rango de un semaforo",
+        "description": "crea y verifica la existencia de un rango nuevo",
+        "operationId": "Srango",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo horario",
+            "schema": {
+              "$ref": "#/definitions/Response_rango"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Rango/Create": {
+      "post": {
+        "tags": [
+          "Rango"
+        ],
+        "summary": "ingresar el rango de un semaforo",
+        "description": "crea y verifica la existencia de un rango nuevo",
+        "operationId": "Crango",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan nuevos datos de un rango",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_rango"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego nuvo horario",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/Rango/{ranId}": {
+      "get": {
+        "tags": [
+          "Rango"
+        ],
+        "summary": "imprime un rango espesifico",
+        "description": "se imprimen los datos del rango deseado",
+        "operationId": "Rrango",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ranId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra un horario",
+            "schema": {
+              "$ref": "#/definitions/Response_rango"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "Rango"
+        ],
+        "summary": "actualizacion el rango",
+        "description": "se actualizan los datos del rango deseado",
+        "operationId": "Urango",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ranId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan los datos deseados de un rango selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_rango"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se rango un horario",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "Rango"
+        ],
+        "summary": "eliminacion de rango",
+        "description": "se eliminan los datos del rango deseado",
+        "operationId": "Drango",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "ranId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina un rango",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoVerde/Show": {
+      "get": {
+        "tags": [
+          "Tiempo verde"
+        ],
+        "summary": "ingresar el tiempo en verde de un semaforo",
+        "description": "crea y verifica la existencia de un nuevo tiempo",
+        "operationId": "Stverde",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego un nuvo tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_tiempo_verde"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoVerde/Create": {
+      "post": {
+        "tags": [
+          "Tiempo verde"
+        ],
+        "summary": "ingresar el tiempo en verde de un semaforo",
+        "description": "crea y verifica la existencia de un nuevo tiempo",
+        "operationId": "Ctverde",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan el nuevo tiempo del verde",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_tiempo_verde"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego un nuvo tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoVerde/{tveId}": {
+      "get": {
+        "tags": [
+          "Tiempo verde"
+        ],
+        "summary": "imprime  un tiempo de verde espesifico",
+        "description": "se imprimen el tiempo deseado",
+        "operationId": "Rtverde",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tveId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_tiempo_verde"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "Tiempo verde"
+        ],
+        "summary": "actualizacion de el tiempo del verde",
+        "description": "se actualizan el tiempo deseado",
+        "operationId": "Utverde",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tveId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan el tiempo del verde selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_tiempo_verde"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se actualiza el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "Tiempo verde"
+        ],
+        "summary": "eliminacion de el tiempo en verde",
+        "description": "se eliminan un tiempo deseado",
+        "operationId": "Dtverde",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tveId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoAmarillo/Show": {
+      "get": {
+        "tags": [
+          "Tiempo amarillo"
+        ],
+        "summary": "ingresar el tiempo en amarillo de un semaforo",
+        "description": "crea y verifica la existencia de un nuevo tiempo",
+        "operationId": "Stamarillo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego un nuvo tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_tiempo_amarillo"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoAmarillo/Create": {
+      "post": {
+        "tags": [
+          "Tiempo amarillo"
+        ],
+        "summary": "ingresar el tiempo en amarillo de un semaforo",
+        "description": "crea y verifica la existencia de un nuevo tiempo",
+        "operationId": "Ctamarillo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan el nuevo tiempo del amarillo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_tiempo_amarillo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego un nuvo tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoAmarillo/{tamId}": {
+      "get": {
+        "tags": [
+          "Tiempo amarillo"
+        ],
+        "summary": "imprime  un tiempo de amarillo espesifico",
+        "description": "se imprimen el tiempo deseado",
+        "operationId": "Rtamarillo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tamId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_tiempo_amarillo"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "Tiempo amarillo"
+        ],
+        "summary": "actualizacion de el tiempo del amarillo",
+        "description": "se actualizan el tiempo deseado",
+        "operationId": "Utamarillo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tamId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan el tiempo del amarillo selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_tiempo_amarillo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se actualiza el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "Tiempo amarillo"
+        ],
+        "summary": "eliminacion de el tiempo en amarillo",
+        "description": "se eliminan un tiempo deseado",
+        "operationId": "Dtamarillo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tamId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoRojo/Show": {
+      "get": {
+        "tags": [
+          "Tiempo rojo"
+        ],
+        "summary": "ingresar el tiempo en rojo de un semaforo",
+        "description": "crea y verifica la existencia de un nuevo tiempo",
+        "operationId": "strojo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego un nuvo tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_tiempo_rojo"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoRojo/Create": {
+      "post": {
+        "tags": [
+          "Tiempo rojo"
+        ],
+        "summary": "ingresar el tiempo en rojo de un semaforo",
+        "description": "crea y verifica la existencia de un nuevo tiempo",
+        "operationId": "Ctrojo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "registro",
+            "description": "Se agregan el nuevo tiempo del rojo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_tiempo_rojo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se agrego un nuvo tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/TiempoRojo/{troId}": {
+      "get": {
+        "tags": [
+          "Tiempo rojo"
+        ],
+        "summary": "imprime  un tiempo de rojo espesifico",
+        "description": "se imprimen el tiempo deseado",
+        "operationId": "Rtrojo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "troId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se muestra el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_tiempo_rojo"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "put": {
+        "tags": [
+          "Tiempo rojo"
+        ],
+        "summary": "actualizacion de el tiempo del rojo",
+        "description": "se actualizan el tiempo deseado",
+        "operationId": "Utrojo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "troId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "actualizar",
+            "description": "se actualizan el tiempo del rojo selecionado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item_tiempo_rojo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "se actualiza el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      },
+      "delete": {
+        "tags": [
+          "Tiempo rojo"
+        ],
+        "summary": "eliminacion de el tiempo en rojo",
+        "description": "se eliminan un tiempo deseado",
+        "operationId": "Dtrojo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "troId",
+            "in": "path",
+            "description": "id del registro a buscar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Se elimina el tiempo",
+            "schema": {
+              "$ref": "#/definitions/Response_general"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Item_all": {
+      "type": "object",
+      "required": [
+        "nombre",
+        "status",
+        "longitud",
+        "latitud",
+        "tiempo_inicio",
+        "inicio_suspencion",
+        "fin_suspencion",
+        "tiempo_verde",
+        "tiempo_amarillo",
+        "tiempo_rojo"
+      ],
+      "properties": {
+        "nombre": {
+          "type": "string",
+          "description": "nombre del nuevo semaforo"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "estado de el semaforo"
+        },
+        "longitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "rango del semaforo"
+        },
+        "latitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "rango del semaforo"
+        },
+        "tiempo_inicio": {
+          "type": "string",
+          "description": "tiempo para la identificacion de color inicial"
+        },
+        "inicio_suspencion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "inicio de suspencion del semaforo"
+        },
+        "fin_suspencion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "fin de suspencion del semaforo"
+        },
+        "tiempo_verde": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo del verde en el semaforo"
+        },
+        "tiempo_amarillo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo del amarillo en el semaforo"
+        },
+        "tiempo_rojo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo del rojo en el semaforo"
+        }
+      }
+    },
+    "Response_all": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "nombre": {
+          "type": "string",
+          "description": "nombre del nuevo semaforo"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "estado de el semaforo"
+        },
+        "longitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "rango del semaforo"
+        },
+        "latitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "rango del semaforo"
+        },
+        "tiempo_inicio": {
+          "type": "string",
+          "description": "tiempo para la identificacion de color inicial"
+        },
+        "inicio_suspencion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "inicio de suspencion del semaforo"
+        },
+        "fin_suspencion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "fin de suspencion del semaforo"
+        },
+        "tiempo_verde": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo del verde en el semaforo"
+        },
+        "tiempo_amarillo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo del amarillo en el semaforo"
+        },
+        "tiempo_rojo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo del rojo en el semaforo"
+        }
+      }
+    },
+    "Item_semaforo": {
+      "type": "object",
+      "required": [
+        "nombre",
+        "status",
+        "tiempo_inicio",
+        "id_horario",
+        "id_rango",
+        "id_tverde",
+        "id_tamarillo",
+        "id_trojo"
+      ],
+      "properties": {
+        "nombre": {
+          "type": "string",
+          "description": "nombre con que se identifica el semaforo"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "estado de el semaforo"
+        },
+        "tiempo_inicio": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo para la identificacion de color inicial"
+        },
+        "id_horario": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de horario del semaforo"
+        },
+        "id_rango": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de rango del semaforo"
+        },
+        "id_tverde": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de tiempo del verde en el semaforo"
+        },
+        "id_tamarillo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de tiempo del amarillo en el semaforo"
+        },
+        "id_trojo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de tiempo del rojo en el semaforo"
+        }
+      }
+    },
+    "Response_semaforo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "nombre": {
+          "type": "string",
+          "description": "nombre del nuevo semaforo"
+        },
+        "status": {
+          "type": "boolean",
+          "description": "estado de el semaforo"
+        },
+        "tiempo_inicio": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo para la identificacion de color inicial"
+        },
+        "id_horario": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de horario del semaforo"
+        },
+        "id_rango": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de rango del semaforo"
+        },
+        "id_tverde": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de tiempo del verde en el semaforo"
+        },
+        "id_tamarillo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de tiempo del amarillo en el semaforo"
+        },
+        "id_trojo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "identificadir de tiempo del rojo en el semaforo"
+        },
+        "fecha_creacion": {
+          "type": "string",
+          "description": "fecha en el que se intalo el semaforo"
+        }
+      }
+    },
+    "Item_horario": {
+      "type": "object",
+      "required": [
+        "inicio",
+        "fin"
+      ],
+      "properties": {
+        "inicio_suspencion": {
+          "type": "string",
+          "description": "inicio de la supencion del semaforo"
+        },
+        "fin_suspencion": {
+          "type": "string",
+          "description": "fin de la supencion del semaforo"
+        }
+      }
+    },
+    "Response_horario": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "inicio_suspencion": {
+          "type": "string",
+          "description": "inicio de la supencion del semaforo"
+        },
+        "fin_suspencion": {
+          "type": "string",
+          "description": "fin de la supencion del semaforo"
+        }
+      }
+    },
+    "Item_rango": {
+      "type": "object",
+      "required": [
+        "longitud",
+        "latitud"
+      ],
+      "properties": {
+        "longitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "posicion del semaforo"
+        },
+        "latitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "posicion del semaforo"
+        }
+      }
+    },
+    "Response_rango": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "longitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "posicion del semaforo"
+        },
+        "latitud": {
+          "type": "integer",
+          "format": "int32",
+          "description": "posicion del semaforo"
+        }
+      }
+    },
+    "Item_tiempo_verde": {
+      "type": "object",
+      "required": [
+        "tiempo"
+      ],
+      "properties": {
+        "tiempo_verde": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo que tarda el color verde en el semaforo"
+        }
+      }
+    },
+    "Response_tiempo_verde": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "tiempo_verde": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo que tarda el color verde en el semaforo"
+        }
+      }
+    },
+    "Item_tiempo_amarillo": {
+      "type": "object",
+      "required": [
+        "tiempo"
+      ],
+      "properties": {
+        "tiempo_amarillo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo que tarda el color verde en el semaforo"
+        }
+      }
+    },
+    "Response_tiempo_amarillo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "tiempo_amarillo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo que tarda el color verde en el semaforo"
+        }
+      }
+    },
+    "Item_tiempo_rojo": {
+      "type": "object",
+      "required": [
+        "tiempo"
+      ],
+      "properties": {
+        "tiempo_rojo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo que tarda el color verde en el semaforo"
+        }
+      }
+    },
+    "Response_tiempo_rojo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "id del registro"
+        },
+        "tiempo_rojo": {
+          "type": "integer",
+          "format": "int32",
+          "description": "tiempo que tarda el color verde en el semaforo"
+        }
+      }
+    },
+    "Response_general": {
+      "type": "object",
+      "properties": {
+        "mensaje": {
+          "type": "string",
+          "description": "resultado de la peticion realiza"
+        }
+      }
+    }
+  }
+}
