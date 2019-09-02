@@ -18,7 +18,7 @@ class TiempoVerdeController{
                     'tiempo_verde' => (int)$row['tiempo_verde']
                 );
 
-                array_push($array['TiemposVerde'],$row);
+                array_push($array['TiemposVerde'],$item);
             }
 
             $this->PrintJSON($array);
@@ -43,7 +43,7 @@ class TiempoVerdeController{
                     'tiempo_verde' => (int)$row['tiempo_verde']
                 );
 
-                array_push($array['TiempoVerde'],$row);
+                array_push($array['TiempoVerde'],$item);
 
             $this->PrintJSON($array);
 
@@ -57,7 +57,12 @@ class TiempoVerdeController{
         $tiempo_verde = new TiempoVerde();
 
         $res= $tiempo_verde->Insert($item);
-        $this->exito('Nuevo horario agregado');
+        
+        if(!$res){
+            $this->Exito("Error al Crear tiempo de verde");
+        }else{
+            $this->Error("Tiempo de verde creado correctamente");
+        }
     }
 
     function Up($body,$id){
@@ -65,27 +70,37 @@ class TiempoVerdeController{
         $tiempo_verde = new TiempoVerde();
 
         $res= $tiempo_verde->Update($item,$id);
-        $this->exito('Los datos del horario se actualizaron');
+        if(!$res){
+            $this->Exito("Error al actualizar tiempo de verde");
+        }else{
+            $this->Error("Tiempo de verde actulizado correctamente");
+        }
     }
 
     function Del($id){
-        $array = json_decode($body, true);
-        $id = $array[0]['id'];
         $tiempo_verde = new TiempoVerde();
 
         $res= $tiempo_verde->Delete($id);
-        $this->exito('horario Eliminado');
+        
+        if(!$res){
+            $this->Exito("Error al eliminar tiempo de verde");
+        }else{
+            $this->Error("Tiempo de verde eliminado correctamente");
+        }
     }
 
     function Exito($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 
     function PrintJSON($array){
+        header('Content-Type: application/json');
         echo json_encode($array);
     }
 
     function Error($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 }

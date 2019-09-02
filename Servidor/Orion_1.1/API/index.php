@@ -89,6 +89,10 @@ if(isset($_GET['url'])){
         
         if(json_last_error()==0){
             switch($item){
+                case "All/Create";
+                    $api_all->Ins($body);
+                    http_response_code(200);
+                break;
                 case "Horario/Create";
                     $api_horario->Ins($body);
                     http_response_code(200);
@@ -127,6 +131,10 @@ if(isset($_GET['url'])){
         
         if(json_last_error()==0){
             switch($item){
+                case "All/$numero";
+                    $api_all->Up($body,$numero);
+                    http_response_code(200);
+                break;
                 case "Horario/$numero";
                     $api_horario->Up($body,$numero);
                     http_response_code(200);
@@ -162,6 +170,10 @@ if(isset($_GET['url'])){
 
     }else if($_SERVER['REQUEST_METHOD']=='DELETE'){
         switch($item){
+            case "All/$numero";
+                $api_all->Del($numero);
+                http_response_code(200);
+            break;
             case "Horario/$numero";
                 $api_horario->Del($numero);
                 http_response_code(200);
