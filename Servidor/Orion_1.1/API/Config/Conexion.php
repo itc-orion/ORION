@@ -13,7 +13,7 @@
             $this->db = 'orion';
             $this->user = 'root';
             $this->pass = "";
-            $this->charset = 'utf8mb4';
+            $this->charset = 'utf8';
         }
 
         function connect(){
@@ -21,10 +21,10 @@
                 $connection = "mysql:host=" . $this->host . ";dbname=" . $this->db . ";charset=" . $this->charset;
 
                 $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                            PDO::ATTR_EMULATE_PREPARES => false,
+                            PDO::ATTR_EMULATE_PREPARES => false
                         ];
-
-                $pdo = new PDO($connection, $this->user, $this->pass);
+                $pdo = new PDO($connection, $this->user, $this->pass, $options);
+                //$pdo->exec("SET CHARACTER SET utf8mb4");
 
                 return $pdo;
             }catch(PDOException $e){

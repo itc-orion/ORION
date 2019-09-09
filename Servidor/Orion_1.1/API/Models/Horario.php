@@ -9,6 +9,12 @@ class Horario extends DB{
         return $query;
     }
 
+    function SelectData($inicio_suspencion, $fin_suspencion){
+        $query = $this->connect()->prepare('SELECT * FROM horarios WHERE inicio_suspencion= :inicio_suspencion AND fin_suspencion= :fin_suspencion');
+        $query->execute(['inicio_suspencion' => $inicio_suspencion, 'fin_suspencion' => $fin_suspencion]);
+        return $query;
+    }
+
     function Select($id){
         $query = $this->connect()->prepare('SELECT * FROM horarios WHERE id= :id');
         $query->execute(['id' => $id]);
@@ -17,13 +23,13 @@ class Horario extends DB{
 
     function Insert($horario){
         $query = $this->connect()->prepare('INSERT INTO horarios (inicio_suspencion, fin_suspencion) VALUES (:inicio_suspencion, :fin_suspencion)');
-        $query->execute(['inicio_suspencion' => $horario[0]['inicio_suspencion'], 'fin_suspencion' => $horario[0]['fin_suspencion']]);
+        $query->execute(['inicio_suspencion' => $horario['inicio_suspencion'], 'fin_suspencion' => $horario['fin_suspencion']]);
         return $query;
     }
 
     function Update($horario,$id){
-        $query = $this->connect()->prepare('UPDATE horarios SET inicio_suspencion= :inicio, fin_suspencion= :fin_suspencion WHERE id= :id');
-        $query->execute(['id' => $id, 'inicio_suspencion' => $horario[0]['inicio_suspencion'], 'fin_suspencion' => $horario[0]['fin_suspencion']]);
+        $query = $this->connect()->prepare('UPDATE horarios SET inicio_suspencion= :inicio_suspencion, fin_suspencion= :fin_suspencion WHERE id= :id');
+        $query->execute(['id' => $id, 'inicio_suspencion' => $horario['inicio_suspencion'], 'fin_suspencion' => $horario['fin_suspencion']]);
         return $query;
     }
 

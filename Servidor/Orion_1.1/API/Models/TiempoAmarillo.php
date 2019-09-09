@@ -9,6 +9,12 @@ class TiempoAmarillo extends DB{
         return $query;
     }
 
+    function SelectData($tiempo_amarillo){
+        $query = $this->connect()->prepare('SELECT * FROM tiempos_amarillo WHERE tiempo_amarillo= :tiempo_amarillo');
+        $query->execute(['tiempo_amarillo' => $tiempo_amarillo]);
+        return $query;
+    }
+
     function Select($id){
         $query = $this->connect()->prepare('SELECT * FROM tiempos_amarillo WHERE id= :id');
         $query->execute(['id' => $id]);
@@ -17,13 +23,13 @@ class TiempoAmarillo extends DB{
 
     function Insert($item){
         $query = $this->connect()->prepare('INSERT INTO tiempos_amarillo (tiempo_amarillo) VALUES (:tiempo_amarillo)');
-        $query->execute(['tiempo_amarillo' => $item[0]['tiempo_amarillo']]);
+        $query->execute(['tiempo_amarillo' => $item['tiempo_amarillo']]);
         return $query;
     }
 
     function Update($item,$id){
         $query = $this->connect()->prepare('UPDATE tiempos_amarillo SET tiempo_amarillo= :tiempo_amarillo WHERE id= :id');
-        $query->execute(['id' => $id, 'tiempo_amarillo' => $item[0]['tiempo_amarillo']]);
+        $query->execute(['id' => $id, 'tiempo_amarillo' => $item['tiempo_amarillo']]);
         return $query;
     }
 

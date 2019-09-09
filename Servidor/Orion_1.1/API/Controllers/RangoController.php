@@ -15,11 +15,11 @@ class RangoController{
             while($row = $res->fetch(PDO::FETCH_ASSOC)){
                 $item = array(
                     'id' => (int)$row['id'],
-                    'longitud' => (int)$row['longitud'],
-                    'latitud' => (int)$row['latitud']
+                    'longitud' => (float)$row['longitud'],
+                    'latitud' => (float)$row['latitud']
                 );
 
-                array_push($array['Rangos'],$row);
+                array_push($array['Rangos'],$item);
             }
 
             $this->PrintJSON($array);
@@ -41,11 +41,11 @@ class RangoController{
             $row = $res->fetch();
                 $item = array(
                     'id' => (int)$row['id'],
-                    'longitud' => (int)$row['longitud'],
-                    'latitud' => (int)$row['latitud']
+                    'longitud' => (float)$row['longitud'],
+                    'latitud' => (float)$row['latitud']
                 );
 
-                array_push($array['Rango'],$row);
+                array_push($array['Rango'],$item);
 
             $this->PrintJSON($array);
 
@@ -59,33 +59,51 @@ class RangoController{
         $rango = new Rango();
 
         $res= $rango->Insert($item);
-        $this->exito('Nuevo horario agregado');
+        
+        if(!$res){
+            $this->Exito("Error al Crear rango");
+        }else{
+            $this->Error("Rango creado correctamente");
+        }
     }
 
     function Up($body,$id){
         $item = json_decode($body, true);
         $rango = new Rango();
 
-        $res= $rango->Update($item,$di);
-        $this->exito('Los datos del horario se actualizaron');
+        $res= $rango->Update($item,$id);
+        
+        if(!$res){
+            $this->Exito("Error al actualizar rango");
+        }else{
+            $this->Error("Rango actulizado correctamente");
+        }
     }
 
     function Del($id){
         $rango = new Rango();
 
         $res= $rango->Delete($id);
-        $this->exito('horario Eliminado');
+        
+        if(!$res){
+            $this->Exito("Error al eliminar rango");
+        }else{
+            $this->Error("Rango eliminado correctamente");
+        }
     }
 
     function Exito($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 
     function PrintJSON($array){
+        header('Content-Type: application/json');
         echo json_encode($array);
     }
 
     function Error($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 }
