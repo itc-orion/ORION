@@ -18,9 +18,9 @@
 </head>
 <body>
 
-    <header id = "busqueda">
+    <header>
         
-        <div id ="al">
+        <div>
             <input type="text" placeholder="Buscar" id = "barra">
         </div>
 
@@ -28,26 +28,25 @@
 
     </header>
 
-    <div class="panel">
-        <div class="mapa" id="map"></div>    
+    <div>
+        <div id="map"></div>    
 
-        <div class="formulario" id="form">
-            <div id="primero">
-                <input class = "campo" type="text" name="latitud" placeholder="Latitud"><input class = "campo" type="text" name="longitud" placeholder="Longitud">
+        <div id="form">
+            <div id="primero"><input class = "campo" name="latitud" placeholder="Latitud"><input class = "campo" name="longitud" placeholder="Longitud">
             </div>
             
             <div id = "segundo">
-                <input class = "nombre" type="text" name="nombre" placeholder="Nombre">
-                <input class = "campo" type="text" name="verde" placeholder="Tiempo verde">
-                <input class = "campo" type="text" name="amarillo" placeholder="Tiempo amarillo">
-                <input class = "campo" type="text" name="rojo" placeholder="Tiempo rojo">
+                <input id = "nombre" class = "campo" type="text" name="nombre" placeholder="Nombre">
+                <input class = "campo" name="verde" placeholder="Tiempo verde">
+                <input class = "campo" name="amarillo" placeholder="Tiempo amarillo">
+                <input class = "campo" name="rojo" placeholder="Tiempo rojo">
                 <input class = "campo" type="text" name="inicio" placeholder="Hora de incio">
                 <input class = "campo" type="text" name="suspension" placeholder="Hora de suspensión">
             </div>
 
             <div id="tercero">
-                <button id="enviar" class = "btn" type="submit">Guardar</button>
-                <button class = "btn" >Eliminar</button>
+                <button id="enviar" type="submit">Guardar</button>
+                <button>Eliminar</button>
             </div>
 
         </div>

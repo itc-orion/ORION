@@ -31,17 +31,13 @@ header{
     font-weight: bold;
 }
 
-.panel{
+body > div{
     display: flex;
     flex-direction: row;
     align-items: stretch;
 }
 
-.mapa{
-    flex-basis: 180%;
-}
-
-.formulario{
+#form{
     height: 680px;
     background-color: #F8F7F7;
     display: flex;
@@ -79,19 +75,13 @@ header{
     justify-content: space-around;
 }
 
-.nombre{
+#nombre{
     width: 80%;
     height: 18px;
     margin-left: 20px;
 }
 
-.campo{
-    width: 95px;
-    height: 18px;
-    margin-left: 20px;
-}
-
-.btn{
+div > button{
 
     height: 50%;
     width: 30%;
@@ -105,21 +95,20 @@ header{
 
 }
 
-.btn:hover{
+div > button:hover{
     background: blue;
 }
 
 input{
+    width: 95px;
+    height: 18px;
+    margin-left: 20px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 5px;
 }
 
-
-
-
-
 #map{
-
+    flex-basis: 180%;
     height: 680px;
     width: 100%;
 }

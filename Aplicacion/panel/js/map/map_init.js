@@ -4,17 +4,27 @@ function DrawAreas()
 {
 
 // Obtiene todas las areas o poligonos y los dibuja en el mapa
-HttpRequest('http://localhost:80/get.php').then(function(myJson)
+HttpRequestGET(urlGET).then(function(myJson)
 {
 
+  
+
+
   let data=JSON.parse(myJson)
-    for(let i=0;i<data.count;i++)
+  if(data.Semaforos!=undefined){
+
+    for(let i=0;i<data.Semaforos.length;i++)
     {
-      L.geoJSON(data.objects[i].object,{
+
+     
+
+      L.geoJSON(data.Semaforos[i].area.object,{
         "color": "yellow"
     
       }).addTo(map);
+
     }
+  }
 
 });
 
