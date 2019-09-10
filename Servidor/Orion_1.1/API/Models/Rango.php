@@ -9,6 +9,12 @@ class Rango extends DB{
         return $query;
     }
 
+    function SelectData($longitud, $latitud){
+        $query = $this->connect()->prepare('SELECT * FROM rangos WHERE longitud= :longitud AND latitud= :latitud');
+        $query->execute(['longitud' => $longitud, 'latitud' => $latitud]);
+        return $query;
+    }
+
     function Select($id){
         $query = $this->connect()->prepare('SELECT * FROM rangos WHERE id= :id');
         $query->execute(['id' => $id]);
@@ -17,13 +23,13 @@ class Rango extends DB{
 
     function Insert($item){
         $query = $this->connect()->prepare('INSERT INTO rangos (longitud, latitud) VALUES (:longitud, :latitud)');
-        $query->execute(['longitud' => $item[0]['longitud'], 'latitud' => $item[0]['latitud']]);
+        $query->execute(['longitud' => $item['longitud'], 'latitud' => $item['latitud']]);
         return $query;
     }
 
     function Update($item,$id){
         $query = $this->connect()->prepare('UPDATE rangos SET longitud= :longitud, latitud= :latitud WHERE id= :id');
-        $query->execute(['id' => $id, 'longitud' => $item[0]['longitud'], 'latitud' => $item[0]['latitud']]);
+        $query->execute(['id' => $id, 'longitud' => $item['longitud'], 'latitud' => $item['latitud']]);
         return $query;
     }
 

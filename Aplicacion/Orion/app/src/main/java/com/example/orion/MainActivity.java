@@ -4,50 +4,57 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
-import android.os.StrictMode;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.BreakIterator;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+import okio.ByteString;
+
+
 public class MainActivity extends AppCompatActivity implements Runnable {
 
     double longitudeGPS, latitudeGPS;
-    TextView color,sc;
-    int cont;
+    TextView color, sc;
+    int cont, id = 4;
 
     String devuelve = "";
     String pagina = "";
 
     boolean tf = false;
     boolean b = true;
+
+    private String url;
 
     int pos;
 
@@ -59,15 +66,20 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
     private Animation animacion;
 
+    private WebSocket webSocket;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         color = (TextView) findViewById(R.id.txt);
         sc = (TextView) findViewById(R.id.sc);
         animacion = AnimationUtils.loadAnimation(this, R.anim.animacion);
         llenaLista();
+
+        this.mostrarCuadroDeDialogo();
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -75,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                 while (true) {
                     b = true;
                     try {
-                        Thread.sleep(10000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -86,11 +98,62 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
         color.setBackgroundResource(R.color.black);
 
+
+    }
+
+    private void mostrarCuadroDeDialogo() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        View view = inflater.inflate(R.layout.dialog, null);
+
+        builder.setView(view);
+
+        final AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+        final EditText urlET = (EditText) view.findViewById(R.id.url);
+
+        Button aceptar = (Button) view.findViewById(R.id.Aceptar);
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                url = urlET.getText().toString();
+
+                if (!url.isEmpty()) {
+                    instantiateWebSocket();
+                    iniciaLocalizacion();
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(MainActivity.this, "Ingresa un valor valido", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void iniciaLocalizacion() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
         } else {
             locationStart();
         }
+    }
+
+    private void instantiateWebSocket() {
+
+        OkHttpClient client = new OkHttpClient();
+
+
+        //replace x.x.x.x with your machine's IP Address
+        Request request = new Request.Builder().url(url).build();
+
+
+        SocketListener socketListener = new SocketListener(this);
+
+
+        webSocket = client.newWebSocket(request, socketListener);
+
     }
 
     private void locationStart() {
@@ -121,10 +184,11 @@ public class MainActivity extends AppCompatActivity implements Runnable {
     }
 
     private void llenaLista() {
-        listS.add(new semaforo("semaforo1", 47, 31, 15, 81));
-        listS.add(new semaforo("semaforo3", 62, 35, 36, 100));
-        listS.add(new semaforo("semaforo2", 57, 40, 42, 100));
-
+        listS.add(new semaforo("chevrolet", 57, 30, 18, 90));
+        listS.add(new semaforo("las vias", 57, 41, 1, 101));
+        listS.add(new semaforo("coppel", 48, 35, 67, 86));
+        listS.add(new semaforo("elektra", 62, 35, 12, 100));
+        listS.add(new semaforo("mega", 62, 35, 12, 100));
     }
 
     public void iniciaTodo(int pos) {
@@ -220,10 +284,6 @@ public class MainActivity extends AppCompatActivity implements Runnable {
         }
     }
 
-    public void muestraToast() {
-        Toast.makeText(MainActivity.this, "Realiza peticion", Toast.LENGTH_SHORT).show();
-    }
-
     /* Aqui empieza la Clase Localizacion */
     public class Localizacion implements LocationListener {
         MainActivity mainActivity;
@@ -248,6 +308,9 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                 final String sLongitud = String.valueOf(loc.getLongitude());
                 b = false;
 
+                webSocket.send("[" + sLongitud + "," + sLatitud + "]");
+
+/*
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
 
@@ -255,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
                 try {
 
-                    URL url = new URL("https://65e598bd.ngrok.io/nearby+fleet+point+" + sLatitud + "+" + sLongitud + "+50");
+                    URL url = new URL("https://b36c71d4.ngrok.io/nearby+fleet+point+" + sLatitud + "+" + sLongitud + "+15");
                     HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
 
 
@@ -276,18 +339,6 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                     Gson gson = new GsonBuilder().create();
                     res = gson.fromJson(pagina, respuesta.class);
 
-                    /*String arr[] = pagina.split(",");
-
-                    if (arr.length > 5){
-                        String arr2[] = arr[1].split(":");
-                        res.setCount(1);
-                        res.setObj(new ArrayList<objects>());
-                        String r = arr2[2].substring(1,(arr2[2].length()-1));
-                        res.getObj().add(new objects(r));
-                        String s = res.getObj().get(0).getId();
-                    }*/
-
-                    pagina = "";
 
                     if (res.getCount() != 0) {
                         if (!tf) {
@@ -303,23 +354,23 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                             if (pos == 10) {
                                 iniciaTodo(0);
                             } else {
-                                iniciaTodo(pos);
+                                iniciaTodo(0);
                             }
                             tf = true;
                         }
                     } else {
                         if (tf) {
-                            thread.interrupt();
+                           thread.interrupt();
                             sc.setVisibility(View.VISIBLE);
                             color.setVisibility(View.INVISIBLE);
                             tf = false;
                         }
                     }
-
+                    pagina = "";
                 } catch (Exception e) {
                     Log.e("Error", "Exception: " + e.getMessage());
                 }
-
+                */
             }
 
         }
@@ -349,6 +400,85 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                     Log.d("debug", "LocationProvider.TEMPORARILY_UNAVAILABLE");
                     break;
             }
+        }
+    }
+
+    public class SocketListener extends WebSocketListener {
+
+
+        public MainActivity activity;
+
+
+        public SocketListener(MainActivity activity) {
+            this.activity = activity;
+        }
+
+
+        @Override
+        public void onOpen(WebSocket webSocket, Response response) {
+
+
+            activity.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    Toast.makeText(activity, "Coneccion establecida!", Toast.LENGTH_LONG).show();
+
+                }
+
+            });
+
+        }
+
+        @Override
+        public void onMessage(final WebSocket webSocket, final String text) {
+
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (text.equals("true") && !tf) {
+                        tf = true;
+                        sc.setVisibility(View.INVISIBLE);
+                        color.setVisibility(View.VISIBLE);
+                        iniciaTodo(id--);
+                        if (id < 0){
+                            id = 4;
+                        }
+                    } else if (text.equals("false") && tf) {
+                        thread.interrupt();
+                        sc.setVisibility(View.VISIBLE);
+                        color.setVisibility(View.INVISIBLE);
+                        tf = false;
+                    }
+                }
+            });
+
+
+        }
+
+
+        @Override
+        public void onMessage(WebSocket webSocket, ByteString bytes) {
+            super.onMessage(webSocket, bytes);
+        }
+
+
+        @Override
+        public void onClosing(WebSocket webSocket, int code, String reason) {
+            super.onClosing(webSocket, code, reason);
+        }
+
+
+        @Override
+        public void onClosed(WebSocket webSocket, int code, String reason) {
+            super.onClosed(webSocket, code, reason);
+        }
+
+
+        @Override
+        public void onFailure(WebSocket webSocket, final Throwable t, @Nullable final Response response) {
+            super.onFailure(webSocket, t, response);
         }
     }
 

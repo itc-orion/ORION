@@ -58,7 +58,12 @@ class HorarioController{
         $horario = new Horario();
 
         $res= $horario->Insert($item);
-        $this->exito('Nuevo horario agregado');
+        
+        if(!$res){
+            $this->Exito("Error al Crear horario");
+        }else{
+            $this->Error("Horario creado correctamente");
+        }
     }
 
     function Up($body,$id){
@@ -66,25 +71,38 @@ class HorarioController{
         $horario = new Horario();
 
         $res= $horario->Update($item,$id);
-        $this->exito('Los datos del horario se actualizaron');
+        
+        if(!$res){
+            $this->Exito("Error al actualizar horario");
+        }else{
+            $this->Error("Horario actulizado correctamente");
+        }
     }
 
     function Del($id){
         $horario = new Horario();
 
         $res= $horario->Delete($id);
-        $this->exito('horario Eliminado');
+        
+        if(!$res){
+            $this->Exito("Error al eliminar horario");
+        }else{
+            $this->Error("Horario eliminado correctamente");
+        }
     }
 
     function Exito($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 
     function PrintJSON($array){
+        header('Content-Type: application/json');
         echo json_encode($array);
     }
 
     function Error($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 }

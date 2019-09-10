@@ -1,13 +1,14 @@
+
 drop database orion;
 create database orion;
 use orion;
 
-CREATE TABLE horarios (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, inicio_suspencion TIME, fin_suspencion TIME);
-CREATE TABLE rangos (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, longitud DECIMAL(15,10), latitud DECIMAL(15,10));
-CREATE TABLE tiempos_verde (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, tiempo_verde INT);
-CREATE TABLE tiempos_amarillo (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, tiempo_amarillo INT);
-CREATE TABLE tiempos_rojo (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, tiempo_rojo INT);
-CREATE TABLE semaforos (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(15), status BOOLEAN,  tiempo_inicio integer, id_horario INT, id_rango INT, id_tverde INT, id_tamarillo INT, id_trojo INT, fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE horarios (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, inicio_suspencion TIME, fin_suspencion TIME) CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE rangos (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, longitud DECIMAL(15,10), latitud DECIMAL(15,10)) CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE tiempos_verde (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, tiempo_verde INT) CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE tiempos_amarillo (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, tiempo_amarillo INT) CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE tiempos_rojo (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, tiempo_rojo INT) CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE semaforos (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(15), status BOOLEAN,  tiempo_inicio integer, id_horario INT, id_rango INT, id_tverde INT, id_tamarillo INT, id_trojo INT, fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP) CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 ALTER TABLE semaforos ADD FOREIGN KEY(id_horario) REFERENCES horarios(id) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE semaforos ADD FOREIGN KEY(id_rango) REFERENCES rangos(id) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -70,7 +71,15 @@ INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_t
 INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES ("Elektra",true,92,1,15,2,1,2);
 INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES ("Mega",true,92,1,16,2,1,2);
 
+CREATE VIEW semaforos_all AS SELECT s.id, s.nombre, s.status, r.longitud, r.latitud, s.tiempo_inicio, h.inicio_suspencion, h.fin_suspencion, tv.tiempo_verde, ta.tiempo_amarillo, tr.tiempo_rojo FROM semaforos s, horarios h, rangos r, tiempos_verde tv, tiempos_amarillo ta, tiempos_rojo tr WHERE h.id=s.id_horario AND r.id=s.id_rango AND tv.id=s.id_tverde AND ta.id=s.id_tamarillo AND tr.id=s.id_trojo ORDER BY s.id ASC;
+
+select * from semaforos;
+
 SELECT s.id, s.nombre, s.status, r.longitud, r.latitud, s.tiempo_inicio, h.inicio_suspencion, h.fin_suspencion, tv.tiempo_verde, ta.tiempo_amarillo, tr.tiempo_rojo FROM semaforos s, horarios h, rangos r, tiempos_verde tv, tiempos_amarillo ta, tiempos_rojo tr WHERE h.id=s.id_horario AND r.id=s.id_rango AND tv.id=s.id_tverde AND ta.id=s.id_tamarillo AND tr.id=s.id_trojo ORDER BY s.id ASC;
 SELECT s.id, s.nombre, s.status, r.longitud, r.latitud, s.tiempo_inicio, h.inicio_suspencion, h.fin_suspencion, tv.tiempo_verde, ta.tiempo_amarillo, tr.tiempo_rojo FROM semaforos s, horarios h, rangos r, tiempos_verde tv, tiempos_amarillo ta, tiempos_rojo tr WHERE h.id=s.id_horario AND r.id=s.id_rango AND tv.id=s.id_tverde AND ta.id=s.id_tamarillo AND tr.id=s.id_trojo AND s.id= :id;
 
-CREATE VIEW semaforos_all AS SELECT s.id, s.nombre, s.status, r.longitud, r.latitud, s.tiempo_inicio, h.inicio_suspencion, h.fin_suspencion, tv.tiempo_verde, ta.tiempo_amarillo, tr.tiempo_rojo FROM semaforos s, horarios h, rangos r, tiempos_verde tv, tiempos_amarillo ta, tiempos_rojo tr WHERE h.id=s.id_horario AND r.id=s.id_rango AND tv.id=s.id_tverde AND ta.id=s.id_tamarillo AND tr.id=s.id_trojo ORDER BY s.id ASC;
+SELECT * FROM horarios WHERE inicio_suspencion='08:00:00' AND fin_suspencion='21:00:00';
+
+SELECT * FROM rangos WHERE longitud=18.8381630000 AND latitud=-98.9419840000;
+
+SELECT * FROM tiempos_verde WHERE tiempo_verde= 67;

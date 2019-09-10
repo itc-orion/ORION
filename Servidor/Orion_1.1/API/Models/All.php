@@ -28,7 +28,7 @@ class All extends DB{
     }
 
     function Delete($id){
-        $query = $this->connect()->prepare('DELETE FROM semaforos_all WHERE id= :id');
+        $query = $this->connect()->prepare('DELETE FROM semaforos WHERE id= :id');
         $query->execute(['id' => $id]);
         return $query;
     }

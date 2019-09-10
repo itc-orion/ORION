@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="#eeeeee">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:text="Digitalizacion de Semaforos Orion"
+        android:textColor="#FFFF"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Introdusca la url ah utilizar:"
+        android:textSize="20dp"
+        android:textColor="#757575"/>
+
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="URL"/>
+
+    <Button
+        android:id="@+id/Aceptar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Aceptar"
+        android:textColor="#FFFF"/>
+
+</LinearLayout>

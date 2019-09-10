@@ -16,7 +16,7 @@ class SemaforoController{
                 $item = array(
                     'id' => (int)$row['id'],
                     'nombre' => $row['nombre'],
-                    'status' => $row['status'],
+                    'status' => (boolean)$row['status'],
                     'tiempo_inicio' => (int)$row['tiempo_inicio'],
                     'id_horario' => (int)$row['id_horario'],
                     'id_rango' => (int)$row['id_rango'],
@@ -25,7 +25,7 @@ class SemaforoController{
                     'id_trojo' => (int)$row['id_trojo']
                 );
 
-                array_push($array['Semaforos'],$row);
+                array_push($array['Semaforos'],$item);
             }
 
             $this->PrintJSON($array);
@@ -48,7 +48,7 @@ class SemaforoController{
                 $item = array(
                     'id' => (int)$row['id'],
                     'nombre' => $row['nombre'],
-                    'status' => $row['status'],
+                    'status' => (boolean)$row['status'],
                     'tiempo_inicio' => (int)$row['tiempo_inicio'],
                     'id_horario' => (int)$row['id_horario'],
                     'id_rango' => (int)$row['id_rango'],
@@ -71,7 +71,12 @@ class SemaforoController{
         $semaforo = new Semaforo();
 
         $res= $semaforo->Insert($item);
-        $this->exito('Nuevo horario agregado');
+        
+        if(!$res){
+            $this->Exito("Error al Crear semaforo");
+        }else{
+            $this->Error("Semaforo creado correctamente");
+        }
     }
 
     function Up($body,$id){
@@ -79,25 +84,38 @@ class SemaforoController{
         $semaforo = new Semaforo();
 
         $res= $semaforo->Update($item,$id);
-        $this->exito('Los datos del horario se actualizaron');
+        
+        if(!$res){
+            $this->Exito("Error al actualizar semaforo");
+        }else{
+            $this->Error("Semaforo actulizado correctamente");
+        }
     }
 
     function Del($id){
         $semaforo = new Semaforo();
 
         $res= $semaforo->Delete($id);
-        $this->exito('horario Eliminado');
+        
+        if(!$res){
+            $this->Exito("Error al eliminar semaforo");
+        }else{
+            $this->Error("Semaforo eliminado correctamente");
+        }
     }
 
     function Exito($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 
     function PrintJSON($array){
+        header('Content-Type: application/json');
         echo json_encode($array);
     }
 
     function Error($mensaje){
+        header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
     }
 }
