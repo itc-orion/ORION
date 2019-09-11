@@ -2,11 +2,11 @@
 var map = L.map('map').setView([18.82804842135663,-98.91869496336972], 20);
 
 // Moscaico google maps 
-L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+/*L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
   maxZoom: 20,
   subdomains:['mt0','mt1','mt2','mt3']
 }).addTo(map);
-
+*/
 
 
 
@@ -15,12 +15,12 @@ L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
     */
 
 
-    /* Mosaico satelital google maps
+    //Mosaico satelital google maps
     L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
       maxZoom: 20,
       subdomains:['mt0','mt1','mt2','mt3']
     }).addTo(map);
-    */
+    
 
 //Opciones de la barra de acciones
 map.pm.addControls({
@@ -37,5 +37,3 @@ map.pm.setPathOptions({
     fillColor: 'yellow',
     fillOpacity: 0.2,
   });
-
-

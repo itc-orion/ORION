@@ -7,8 +7,6 @@ function DrawAreas()
 HttpRequestGET(urlGET).then(function(myJson)
 {
 
-  
-
 
   let data=JSON.parse(myJson)
   if(data.Semaforos!=undefined){
@@ -17,7 +15,6 @@ HttpRequestGET(urlGET).then(function(myJson)
     {
 
      
-
       L.geoJSON(data.Semaforos[i].area.object,{
         "color": "yellow"
     

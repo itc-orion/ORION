@@ -1,7 +1,8 @@
 let geojson={};
 
-var urlPOST = "https://06eabddb.ngrok.io/Orion_1.1/API/All/Create"
-var urlGET = "https://06eabddb.ngrok.io/Orion_1.1/API/All/Show"
+var dominio = "https://7c72a567.ngrok.io"
+var urlPOST = dominio+"/Orion_1.1/API/All/Create"
+var urlGET = dominio+"/Orion_1.1/API/All/Show"
 
 
 var formulario = document.getElementById('enviar');
@@ -45,6 +46,6 @@ formulario.addEventListener('click', function (e) {
    for(let i =0; i<campos.length; i++){
         campos[i].value = ""
    }
-   
+
 })
 
