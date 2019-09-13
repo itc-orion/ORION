@@ -6,7 +6,6 @@ class TiempoVerdeController{
 
     function All(){
         $tiempo_verde = new TiempoVerde();
-        $array = array();
         $array['TiemposVerde'] = array();
 
         $res= $tiempo_verde->Show();
@@ -29,9 +28,7 @@ class TiempoVerdeController{
     }
 
     function Sel($id){
-
         $tiempo_verde = new TiempoVerde();
-        $array = array();
         $array['TiempoVerde'] = array();
 
         $res= $tiempo_verde->Select($id);
@@ -92,16 +89,19 @@ class TiempoVerdeController{
     function Exito($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(200);
     }
 
     function PrintJSON($array){
         header('Content-Type: application/json');
-        echo json_encode($array);
+        echo json_encode($array,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
     }
 
     function Error($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(405);
     }
 }
 

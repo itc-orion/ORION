@@ -7,17 +7,21 @@ include_once 'Models/Rango.php';
 include_once 'Models/TiempoVerde.php';
 include_once 'Models/TiempoAmarillo.php';
 include_once 'Models/TiempoRojo.php';
+include_once 'Models/Tile.php';
 
 class AllController{
-
+    
     function All(){
         $semaforo_all = new All();
-        $array = array();
-        $array['SemaforosAll'] = array();
+        $tile = new Tile();
+        //$array = array();
+        //$arraya['Area'] = array();
+        $array['Semaforos'] = array();
 
         $res= $semaforo_all->Show();
         if($res->rowCount()){
             while($row = $res->fetch(PDO::FETCH_ASSOC)){
+                $id_rango = $this->SelRango((float)$row['longitud'], (float)$row['latitud']);
                 $item = array(
                     'id' => (int)$row['id'],
                     'nombre' => $row['nombre'],
@@ -29,11 +33,18 @@ class AllController{
                     'fin_suspencion' => $row['fin_suspencion'],
                     'tiempo_verde' => (int)$row['tiempo_verde'],
                     'tiempo_amarillo' => (int)$row['tiempo_amarillo'],
-                    'tiempo_rojo' => (int)$row['tiempo_rojo']
+                    'tiempo_rojo' => (int)$row['tiempo_rojo'],
+                    'area' => $tile->Sel($id_rango)
                 );
 
-                array_push($array['SemaforosAll'],$item);
+                //array_push($arraya['Area'],$tile->Sel($item['id']));
+                
+                array_push($array['Semaforos'],$item);
+                
             }
+            //array_push($arraya['Areas'],$tile->All());
+            //array_push($array,$arrays);
+            //array_push($array,$arraya);
 
             $this->PrintJSON($array);
 
@@ -43,51 +54,59 @@ class AllController{
     }
 
     function Sel($id){
-
         $semaforo = new All();
-        $array = array();
-        $array['SemaforoAll'] = array();
+        $tile = new Tile();
+        $array['Semaforo'] = array();
 
         $res= $semaforo->Select($id);
 
         if($res->rowCount() == 1){
             $row = $res->fetch();
-                $item = array(
-                    'id' => (int)$row['id'],
-                    'nombre' => $row['nombre'],
-                    'status' => (boolean)$row['status'],
-                    'longitud' => (float)$row['longitud'],
-                    'latitud' => (float)$row['latitud'],
-                    'tiempo_inicio' => (int)$row['tiempo_inicio'],
-                    'inicio_suspencion' => (string)$row['inicio_suspencion'],
-                    'fin_suspencion' => (string)$row['fin_suspencion'],
-                    'tiempo_verde' => (int)$row['tiempo_verde'],
-                    'tiempo_amarillo' => (int)$row['tiempo_amarillo'],
-                    'tiempo_rojo' => (int)$row['tiempo_rojo']
-                );
-                array_push($array['SemaforoAll'],$item);
+            $id_rango = $this->SelRango((float)$row['longitud'], (float)$row['latitud']);
+            $item = array(
+                'id' => (int)$row['id'],
+                'nombre' => $row['nombre'],
+                'status' => (boolean)$row['status'],
+                'longitud' => (float)$row['longitud'],
+                'latitud' => (float)$row['latitud'],
+                'tiempo_inicio' => (int)$row['tiempo_inicio'],
+                'inicio_suspencion' => (string)$row['inicio_suspencion'],
+                'fin_suspencion' => (string)$row['fin_suspencion'],
+                'tiempo_verde' => (int)$row['tiempo_verde'],
+                'tiempo_amarillo' => (int)$row['tiempo_amarillo'],
+                'tiempo_rojo' => (int)$row['tiempo_rojo'],
+                'area' => $tile->Sel($id_rango)
+            );
+            array_push($array['Semaforo'],$item);
 
             $this->PrintJSON($array);
 
         }else{
-            $this->Error('No hay elementos registrados');
+            $this->Error('el elemento no esta registrado');
         }
     }
 
     function Ins($body){
         $item = json_decode($body, true);
         $semaforo = new Semaforo();
+        $tile = new Tile();
+        $item_semaforo = $item['semaforo'];
+        $item_area = json_encode($item['area']);
 
-        $id_horario = $this->SelHorario($item['inicio_suspencion'], $item['fin_suspencion']);
-        $id_rango = $this->SelRango($item['longitud'], $item['latitud']);
-        $id_tiempo_verde = $this->SelTiempoVerde($item['tiempo_verde']);
-        $id_tiempo_amarillo = $this->SelTiempoAmarillo($item['tiempo_amarillo']);
-        $id_tiempo_rojo = $this->SelTiempoRojo($item['tiempo_rojo']);
+        //print_r($item_semaforo);
+        //print_r($item_area);
+        //echo $body;
+        //echo $item_area;
+        $id_horario = $this->SelHorario($item_semaforo['inicio_suspencion'], $item_semaforo['fin_suspencion']);
+        $id_rango = $this->SelRango($item_semaforo['longitud'], $item_semaforo['latitud']);
+        $id_tiempo_verde = $this->SelTiempoVerde($item_semaforo['tiempo_verde']);
+        $id_tiempo_amarillo = $this->SelTiempoAmarillo($item_semaforo['tiempo_amarillo']);
+        $id_tiempo_rojo = $this->SelTiempoRojo($item_semaforo['tiempo_rojo']);
 
         $item_all = array(
-            'nombre' => $item['nombre'],
-            'status' => $item['status'],
-            'tiempo_inicio' => $item['tiempo_inicio'],
+            'nombre' => $item_semaforo['nombre'],
+            'status' => $item_semaforo['status'],
+            'tiempo_inicio' => $item_semaforo['tiempo_inicio'],
             'id_horario' => $id_horario,
             'id_rango' => $id_rango,
             'id_tverde' => $id_tiempo_verde,
@@ -97,6 +116,7 @@ class AllController{
 
         $res= $semaforo->Insert($item_all);
 
+        $resa= $tile->Ins($id_rango,$item_area);
         if(!$res){
             $this->Exito("Error al Crear registro");
         }else{
@@ -107,24 +127,27 @@ class AllController{
     function Up($body,$id){
         $item = json_decode($body, true);
         $semaforo = new Semaforo();
+        $tile = new Tile();
+        $item_semaforo = $item['semaforo'];
+        $item_area = json_encode($item['area']);
 
-        $id_horario = $this->SelHorario($item['inicio_suspencion'], $item['fin_suspencion']);
-        $id_tiempo_verde = $this->SelTiempoVerde($item['tiempo_verde']);
-        $id_tiempo_amarillo = $this->SelTiempoAmarillo($item['tiempo_amarillo']);
-        $id_tiempo_rojo = $this->SelTiempoRojo($item['tiempo_rojo']);
+        $id_horario = $this->SelHorario($item_semaforo['inicio_suspencion'], $item_semaforo['fin_suspencion']);
+        $id_tiempo_verde = $this->SelTiempoVerde($item_semaforo['tiempo_verde']);
+        $id_tiempo_amarillo = $this->SelTiempoAmarillo($item_semaforo['tiempo_amarillo']);
+        $id_tiempo_rojo = $this->SelTiempoRojo($item_semaforo['tiempo_rojo']);
 
-        $item_all = array(
-            'nombre' => $item['nombre'],
-            'status' => $item['status'],
-            'tiempo_inicio' => $item['tiempo_inicio'],
+        $item_up = array(
+            'nombre' => $item_semaforo['nombre'],
+            'status' => $item_semaforo['status'],
+            'tiempo_inicio' => $item_semaforo['tiempo_inicio'],
             'id_horario' => $id_horario,
             'id_tverde' => $id_tiempo_verde,
             'id_tamarillo' => $id_tiempo_amarillo,
             'id_trojo' => $id_tiempo_rojo
         );
 
-        $res= $semaforo->Update($item_all,$id);
-        
+        $res= $semaforo->Update($item_up,$id);
+        $tile->Up($id_rango,$item_area);
         if(!$res){
             $this->Exito("Error al actualizar registro");
         }else{
@@ -134,9 +157,16 @@ class AllController{
 
     function Del($id){
         $semaforo = new Semaforo();
+        $tile = new Tile();
 
+        $res= $semaforo->Select($id);
+
+        if($res->rowCount() == 1){
+            $row = $res->fetch();
+            $id_rango = $this->SelRango((float)$row['longitud'], (float)$row['latitud']);
+        }
         $res= $semaforo->Delete($id);
-        
+        $tile->Del($id_rango);
         if(!$res){
             $this->Exito("Error al eliminar registro");
         }else{
@@ -147,16 +177,19 @@ class AllController{
     function Exito($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(200);
     }
 
     function PrintJSON($array){
         header('Content-Type: application/json');
         echo json_encode($array,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
     }
 
     function Error($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(405);
     }
 
     function SelHorario($inicio, $fin){

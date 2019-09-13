@@ -16,6 +16,8 @@ ALTER TABLE semaforos ADD FOREIGN KEY(id_tverde) REFERENCES tiempos_verde(id) ON
 ALTER TABLE semaforos ADD FOREIGN KEY(id_tamarillo) REFERENCES tiempos_amarillo(id) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE semaforos ADD FOREIGN KEY(id_trojo) REFERENCES tiempos_rojo(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
+CREATE VIEW semaforos_all AS SELECT s.id, s.nombre, s.status, r.longitud, r.latitud, s.tiempo_inicio, h.inicio_suspencion, h.fin_suspencion, tv.tiempo_verde, ta.tiempo_amarillo, tr.tiempo_rojo FROM semaforos s, horarios h, rangos r, tiempos_verde tv, tiempos_amarillo ta, tiempos_rojo tr WHERE h.id=s.id_horario AND r.id=s.id_rango AND tv.id=s.id_tverde AND ta.id=s.id_tamarillo AND tr.id=s.id_trojo ORDER BY s.id ASC;
+
 INSERT INTO horarios (inicio_suspencion, fin_suspencion) VALUES ("08:00:00", "21:00:00");
 
 INSERT INTO rangos (longitud, latitud) VALUES (18.811895, -98.950987);
@@ -70,8 +72,6 @@ INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_t
 INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES ("Coppel",true,67,1,14,7,1,2);
 INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES ("Elektra",true,92,1,15,2,1,2);
 INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES ("Mega",true,92,1,16,2,1,2);
-
-CREATE VIEW semaforos_all AS SELECT s.id, s.nombre, s.status, r.longitud, r.latitud, s.tiempo_inicio, h.inicio_suspencion, h.fin_suspencion, tv.tiempo_verde, ta.tiempo_amarillo, tr.tiempo_rojo FROM semaforos s, horarios h, rangos r, tiempos_verde tv, tiempos_amarillo ta, tiempos_rojo tr WHERE h.id=s.id_horario AND r.id=s.id_rango AND tv.id=s.id_tverde AND ta.id=s.id_tamarillo AND tr.id=s.id_trojo ORDER BY s.id ASC;
 
 select * from semaforos;
 
