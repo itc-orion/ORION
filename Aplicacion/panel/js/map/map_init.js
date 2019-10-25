@@ -7,18 +7,19 @@ function DrawAreas()
 HttpRequestGET(urlGET).then(function(myJson)
 {
 
-
   let data=JSON.parse(myJson)
   if(data.Semaforos!=undefined){
 
     for(let i=0;i<data.Semaforos.length;i++)
     {
 
-     
       L.geoJSON(data.Semaforos[i].area.object,{
         "color": "yellow"
     
       }).addTo(map);
+
+      var marcador = new L.marker([data.Semaforos[i].latitud, data.Semaforos[i].longitud]).on('click', onClick)
+      marcador.addTo(map)
 
     }
   }

@@ -62,6 +62,18 @@ function agregaMarcador(e) {
 function onClick(e) {
   console.log("Elemento clickeado " + e.latlng.lat + "," + e.latlng.lng)
   //Funcion de GET para ver los datos de ese semaforo
+
+  var consulta = {
+    "rango":{
+      "latitud": e.latlng.lat,
+      "longitud": e.latlng.lng
+    }
+  };
+
+  Consulta(url2, consulta).then(res => {
+    console.log(res)
+  })
+  
 }
 
 

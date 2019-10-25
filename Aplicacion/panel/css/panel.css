@@ -5,7 +5,7 @@ body{
 header{
     height: 50px;
     background: #7456F1;
-    padding-left: 100px;
+    padding-left: 50px;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -15,10 +15,9 @@ header{
 #barra{
 
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.2);
-    padding: 5px;
     height: 20px;
     width: 550px;
-
+    margin-left: -200px;
 
 }
 
