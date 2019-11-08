@@ -5,8 +5,14 @@ include_once 'Config/Conexion.php';
 class All extends DB{
 
     function Show(){
-        $query = $this->connect()->query('SELECT * FROM semaforos_all');
-        return $query;
+        try{
+            $query = $this->connect()->query('SELECT * FROM semaforos_all');
+            return $query;
+        }catch(PDOException $e){
+            header('Content-Type: application/json');
+            echo json_encode(array('Mensaje' => "Error connection" . $e->getMessage()));
+            http_response_code(405);
+        }
     }
 
     function Select($id){

@@ -15,6 +15,12 @@ class Semaforo extends DB{
         return $query;
     }
 
+    function SelectData($id){
+        $query = $this->connect()->prepare('SELECT * FROM semaforos WHERE id_rango= :id');
+        $query->execute(['id' => $id]);
+        return $query;
+    }
+
     function Insert($item){
         $query = $this->connect()->prepare('INSERT INTO semaforos (nombre, status, tiempo_inicio, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES (:nombre, :status, :tiempo_inicio, :id_horario, :id_rango, :id_tverde, :id_tamarillo, :id_trojo)');
         $query->execute(['nombre' => $item['nombre'], 'status' => $item['status'], 'tiempo_inicio' => $item['tiempo_inicio'], 'id_horario' => $item['id_horario'], 'id_rango' => $item['id_rango'], 'id_tverde' => $item['id_tverde'], 'id_tamarillo' => $item['id_tamarillo'], 'id_trojo' => $item['id_trojo']]);
