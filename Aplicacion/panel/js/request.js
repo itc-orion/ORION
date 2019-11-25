@@ -9,7 +9,7 @@ return data;
 
 function HttpRequestPOST(url, json)
 {
-    
+ 
     let data=fetch(url, { method: "POST", body: JSON.stringify(json)}).then(res => res.text());
    
    return data;
@@ -21,7 +21,18 @@ function Consulta(url, json)
         {
             method: "POST", 
             body: JSON.stringify(json)
-        }).then(res => res.text());
+        }).then(res => res.json());
+
+    return data;
+}
+
+function HttpRequestDELETE(url, json)
+{
+    let data = fetch(url, 
+        {
+            method: "POST", 
+            body: JSON.stringify(json)
+        }).then(res => res.json());
 
     return data;
 }

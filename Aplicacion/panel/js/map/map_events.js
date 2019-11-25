@@ -60,7 +60,6 @@ function agregaMarcador(e) {
 }
 
 function onClick(e) {
-  console.log("Elemento clickeado " + e.latlng.lat + "," + e.latlng.lng)
   //Funcion de GET para ver los datos de ese semaforo
 
   var consulta = {
@@ -71,7 +70,16 @@ function onClick(e) {
   };
 
   Consulta(url2, consulta).then(res => {
-    console.log(res)
+    let campos = document.querySelectorAll(".campo")
+
+    campos[2].value = res.Semaforo[0].nombre;
+    campos[0].value = res.Semaforo[0].latitud;
+    campos[1].value = res.Semaforo[0].longitud;
+    campos[3].value = res.Semaforo[0].tiempo_verde;
+    campos[4].value = res.Semaforo[0].tiempo_amarillo;
+    campos[5].value = res.Semaforo[0].tiempo_rojo;
+    campos[6].value = res.Semaforo[0].inicio_suspencion;
+    campos[7].value = res.Semaforo[0].fin_suspencion;
   })
   
 }

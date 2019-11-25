@@ -1,18 +1,21 @@
 let geojson={};
 
-var dominio = "https://609eaef3.ngrok.io"
+var dominio = "https://e5c4c68e.ngrok.io"
 var urlPOST = dominio+"/Orion_1.1/API/All/Create"
 var urlGET = dominio+"/Orion_1.1/API/All/Show"
 var url2 = dominio+"/Orion_1.1/API/All/Select"
+var url3 = dominio+"/Orion_1.1/API/All/Delete"
 
 
 var form = document.getElementById('enviar');
 var view = document.getElementById('view');
+var del = document.getElementById('eliminar');
+let campos = document.querySelectorAll(".campo")
 
 form.addEventListener('click', function (e) {
     e.preventDefault();
 
-    let campos = document.querySelectorAll(".campo")
+    console.log("HOLA");
 
     var datos = {
         "semaforo": {
@@ -30,21 +33,15 @@ form.addEventListener('click', function (e) {
         "area": geojson
     };
 
-    console.log(datos)
+    console.log(datos);
 
-   if(Object.keys(geojson).length!=0)
-   {
-
+   
+    console.log("Entro");
     HttpRequestPOST(urlPOST, datos)
     .then(res => {
-        console.log(res)
+        alert(res);
     });
 
-    console.log(geojson)
-
-    geojson={}
-
-   }
 
    for(let i =0; i<campos.length; i++){
         campos[i].value = ""
@@ -59,4 +56,17 @@ view.addEventListener('click', function(){
         Mapview();
     }
     
+})
+
+del.addEventListener('click', function(){
+    var datos = {
+        "rango":{
+            "longitud": parseFloat(campos[1].value),
+            "latitud": parseFloat(campos[0].value),
+        }
+    }
+    HttpRequestDELETE(url3, datos)
+    .then(res => {
+        alert(res);
+    })
 })
