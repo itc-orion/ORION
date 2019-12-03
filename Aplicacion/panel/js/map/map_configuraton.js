@@ -1,5 +1,5 @@
 //Crea mapa y asigna las coordenadas en que se mostrara
-var map = L.map('map').setView([18.82804842135663,-98.91869496336972], 20);
+var map = L.map('map').setView([18.828411453309435,-98.9173293374312], 20);
 
 //Mosaico satelital google maps
 L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{

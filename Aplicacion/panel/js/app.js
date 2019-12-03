@@ -1,6 +1,6 @@
 let geojson={};
 
-var dominio = "https://e5c4c68e.ngrok.io"
+var dominio = "https://32d1dd76.ngrok.io"
 var urlPOST = dominio+"/Orion_1.1/API/All/Create"
 var urlGET = dominio+"/Orion_1.1/API/All/Show"
 var url2 = dominio+"/Orion_1.1/API/All/Select"
