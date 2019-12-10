@@ -21,6 +21,12 @@ class All extends DB{
         return $query;
     }
 
+    function SelectSocket($id){
+        $query = $this->connect()->prepare('SELECT tiempo_inicio, tiempo_verde, tiempo_amarillo, tiempo_rojo FROM semaforos_all WHERE id= :id');
+        $query->execute(['id' => $id]);
+        return $query;
+    }
+
     function Insert($item){
         $query = $this->connect()->prepare('INSERT INTO semaforos (nombre, tiempo_inicio, status, fecha_creacion, id_horario, id_rango, id_tverde, id_tamarillo, id_trojo) VALUES (:nombre, :tiempo_inicio, :status, :fecha_creacion, :id_horario, :id_rango, :id_tverde, :id_tamarillo, :id_trojo)');
         $query->execute(['nombre' => $item[0]['nombre'], 'tiempo_inicio' => $item[0]['tiempo_inicio'], 'status' => $item[0]['status'],'fecha_creacion' => $item[0]['fecha_creacion'], 'id_horario' => $item[0]['id_horario'], 'id_rango' => $item[0]['id_rango'], 'id_tverde' => $item[0]['id_tverde'], 'id_tamarillo' => $item[0]['id_tamarillo'], 'id_trojo' => $item[0]['id_trojo']]);
