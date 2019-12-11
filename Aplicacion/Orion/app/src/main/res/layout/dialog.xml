@@ -13,13 +13,13 @@
         android:background="@color/colorPrimaryDark"
         android:textSize="30dp"
         android:textAlignment="center"
-        android:text="Digitalizacion de Semaforos Orion"
+        android:text="Digitalización de Semáforos Orion"
         android:textColor="#FFFF"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Introdusca la url ah utilizar:"
+        android:text="Introduzca URL:"
         android:textSize="20dp"
         android:textColor="#757575"/>
 
