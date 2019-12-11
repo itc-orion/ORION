@@ -9,7 +9,7 @@ use Ratchet\TinyRedisClient;
 
 class Chat implements MessageComponentInterface {
 
-    private $client,$redis;
+    private $redis;
 
     public function __construnct() {
        
@@ -17,36 +17,56 @@ class Chat implements MessageComponentInterface {
 
     public function onOpen(ConnectionInterface $conn) 
     {
-        $this->client = $conn;
+        
         $this->redis= new TinyRedisClient("localhost:9851");   
         $this->redis->__call("output", ["json"]);
 
-        echo "\nConectado";
+        echo "\nNuevo Usuario";
     }
 
-    public function onMessage(ConnectionInterface $from, $msg) 
+    public function onMessage(ConnectionInterface $from, $coordinates) 
     { 
         
-        echo "\n".$msg;
-       
-
-
-        $data=json_decode($this->redis->__call("intersects", ["fleet", "object" ,'{"type":"Point","coordinates":'.$msg.'}']));
+        $data=json_decode($this->redis->__call("intersects", ["fleet", "object" ,'{"type":"Point","coordinates":['.$coordinates.']}']));
         
         if($data->{'count'}>0){
-            $this->client->send("true");
-            echo "\ntrue";
+            
+            // Id del area al que entro
+            $id = $data->{'objects'}[0]->{'id'};
+            //Realizar consulta con id para obtener datos del semaforo y llenar array de semaforo
+
+            $semaforo = array(
+                'id' =>  ,
+                'nombre' =>  ,
+                'status' =>  ,
+                'longitud' => ,
+                'latitud' =>  ,
+                'tiempo_inicio' => ,
+                'inicio_suspencion' => ,
+                'fin_suspencion' => ,
+                'tiempo_verde' => ],
+                'tiempo_amarillo' => ,
+                'tiempo_rojo' => ,
+                
+            );
+
+            $from->send(json_encode($semaforo));
+
+           
+            
 
         }else{
-            $this->client->send("false");
-            echo "\nfalse";
+
+            $from->send("false");
+            
         }
+
 
     }
 
     public function onClose(ConnectionInterface $conn) {
 
-        echo "\nDesconectado";
+        echo "\nUsuario desconectado";
 
     }
 
@@ -54,7 +74,3 @@ class Chat implements MessageComponentInterface {
         echo $e->getMessage();
     }
 }
-
-
-
-?>
