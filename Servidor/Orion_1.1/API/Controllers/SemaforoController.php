@@ -6,7 +6,6 @@ class SemaforoController{
 
     function All(){
         $semaforo = new Semaforo();
-        $array = array();
         $array['Semaforos']= array();
 
         $res= $semaforo->Show();
@@ -36,9 +35,7 @@ class SemaforoController{
     }
 
     function Sel($id){
-
         $semaforo = new Semaforo();
-        $array = array();
         $array['Semaforo'] = array();
 
         $res= $semaforo->Select($id);
@@ -107,17 +104,19 @@ class SemaforoController{
     function Exito($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(200);
     }
 
     function PrintJSON($array){
         header('Content-Type: application/json');
-        echo json_encode($array);
+        echo json_encode($array,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
     }
 
     function Error($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(405);
     }
 }
-
 ?>

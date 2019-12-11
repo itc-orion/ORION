@@ -1,0 +1,8 @@
+drop fleet
+
+delete from semaforos;
+delete from horarios;
+delete from rangos;
+delete from tiempos_verde;
+delete from tiempos_amarillo;
+delete from tiempos_rojo;

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="css/panel.css">
+    <link rel="stylesheet" href="css/toggle.css">
 
     <!--Librerias externas-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
@@ -18,9 +19,13 @@
 </head>
 <body>
 
-    <header id = "busqueda">
-        
-        <div id ="al">
+    <header>
+        <label id="switchBtn">
+            <input id="view" type="checkbox">
+            <div class="slide round">Vista satelital</div>
+        </label>
+
+        <div>
             <input type="text" placeholder="Buscar" id = "barra">
         </div>
 
@@ -28,16 +33,16 @@
 
     </header>
 
-    <div class="panel">
-        <div class="mapa" id="map"></div>    
+    <div>
+        <div id="map">
+    </div>    
 
-        <div class="formulario" id="form">
-            <div id="primero">
-                <input class = "campo" type="text" name="latitud" placeholder="Latitud"><input class = "campo" type="text" name="longitud" placeholder="Longitud">
-            </div>
+        <div id="form">
+            <div id="primero"><input class = "campo" type="text" name="latitud" placeholder="Latitud"><input class = "campo" type="text" name="longitud" placeholder="Longitud">
+        </div>
             
             <div id = "segundo">
-                <input class = "nombre" type="text" name="nombre" placeholder="Nombre">
+                <input id = "nombre" class = "campo" type="text" name="nombre" placeholder="Nombre">
                 <input class = "campo" type="text" name="verde" placeholder="Tiempo verde">
                 <input class = "campo" type="text" name="amarillo" placeholder="Tiempo amarillo">
                 <input class = "campo" type="text" name="rojo" placeholder="Tiempo rojo">
@@ -46,8 +51,8 @@
             </div>
 
             <div id="tercero">
-                <button id="enviar" class = "btn" type="submit">Guardar</button>
-                <button class = "btn" >Eliminar</button>
+                <button id="enviar" type="submit">Guardar</button>
+                <button id="eliminar">Eliminar</button>
             </div>
 
         </div>

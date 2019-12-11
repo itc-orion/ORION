@@ -6,7 +6,6 @@ class TiempoRojoController{
 
     function All(){
         $tiempo_rojo = new TiempoRojo();
-        $array = array();
         $array['TiemposRojo'] = array();
 
         $res= $tiempo_rojo->Show();
@@ -29,9 +28,7 @@ class TiempoRojoController{
     }
 
     function Sel($id){
-
         $tiempo_rojo = new TiempoRojo();
-        $array = array();
         $array['TiempoRojo'] = array();
 
         $res= $tiempo_rojo->Select($id);
@@ -92,16 +89,19 @@ class TiempoRojoController{
     function Exito($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(200);
     }
 
     function PrintJSON($array){
         header('Content-Type: application/json');
-        echo json_encode($array);
+        echo json_encode($array,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
     }
 
     function Error($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(405);
     }
 }
 

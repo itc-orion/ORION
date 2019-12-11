@@ -6,7 +6,6 @@ class RangoController{
 
     function All(){
         $rango = new Rango();
-        $array = array();
         $array['Rangos'] = array();
 
         $res= $rango->Show();
@@ -30,9 +29,7 @@ class RangoController{
     }
 
     function Sel($id){
-
         $rango = new Rango();
-        $array = array();
         $array['Rango'] = array();
 
         $res= $rango->Select($id);
@@ -95,16 +92,19 @@ class RangoController{
     function Exito($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(200);
     }
 
     function PrintJSON($array){
         header('Content-Type: application/json');
-        echo json_encode($array);
+        echo json_encode($array,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
     }
 
     function Error($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(405);
     }
 }
 

@@ -6,7 +6,6 @@ class HorarioController{
 
     function All(){
         $horario = new Horario();
-        $array = array();
         $array['Horarios'] = array();
 
         $res= $horario->Show();
@@ -31,7 +30,6 @@ class HorarioController{
 
     function Sel($id){
         $horario = new Horario();
-        $array = array();
         $array['Horario'] = array();
 
         $res= $horario->Select($id);
@@ -94,16 +92,19 @@ class HorarioController{
     function Exito($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(200);
     }
 
     function PrintJSON($array){
         header('Content-Type: application/json');
-        echo json_encode($array);
+        echo json_encode($array,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
     }
 
     function Error($mensaje){
         header('Content-Type: application/json');
         echo json_encode(array('Mensaje' => $mensaje));
+        http_response_code(405);
     }
 }
 
