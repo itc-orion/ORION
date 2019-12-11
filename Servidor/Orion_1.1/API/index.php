@@ -32,9 +32,6 @@
                     case "All/Select";
                         $api_all->Sel($body);
                     break;
-                    case "All/Rango/Select";
-                        $api_all->SelRan($body);
-                    break;
                     case "All/Create";
                         $validar->Ins($body);
                     break;
@@ -48,20 +45,6 @@
             }else{
                 $error->Mensaje("Solo acepta archivos .json o la estructura del archivo tiene un error");
             }
-
-        }else if($_SERVER['REQUEST_METHOD']=='PUT'){
-            $body = file_get_contents('php://input');
-            
-            if(json_last_error()==0){
-                switch($item){
-                    default;
-                        $error->Mensaje("La direcion URL no existe");
-                    break;
-                }
-            }else{
-                $error->Mensaje("Solo acepta archivos .json o la estructura del archivo tiene un error");
-            }
-
         }else if($_SERVER['REQUEST_METHOD']=='DELETE'){
             $body = file_get_contents('php://input');
             

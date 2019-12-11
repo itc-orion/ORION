@@ -93,40 +93,6 @@ class AllController{
         }
     }
 
-    function SelRan($body){
-        $item = json_decode($body, true);
-        $semaforo = new Semaforo();
-        $all = new All();
-        $item_rango = $item['rango'];
-        $array['Semaforo'] = array();
-
-        $id = $this->SelRangoVal($item_rango['longitud'], $item_rango['latitud']);
-        if($id != 0){
-            $res = $semaforo->selectData($id);
-            $row = $res->fetch();
-            $id_sem = (int)$row['id'];
-            $res= $all->SelectSocket($id_sem);
-
-            if($res->rowCount() == 1){
-                $row = $res->fetch();
-                $item = array(
-                    'tiempo_inicio' => (int)$row['tiempo_inicio'],
-                    'tiempo_verde' => (int)$row['tiempo_verde'],
-                    'tiempo_amarillo' => (int)$row['tiempo_amarillo'],
-                    'tiempo_rojo' => (int)$row['tiempo_rojo']
-                );
-                array_push($array['Semaforo'],$item);
-
-                $this->PrintJSON($array);
-
-            }else{
-                $this->Error('el elemento no esta registrado');
-            }
-        }else{
-            $this->Error('el elemento no esta registrado');
-        }
-    }
-
     function Ins($body){
         try{
             $item = json_decode($body, true);
@@ -138,7 +104,6 @@ class AllController{
             $id = $this->SelRangoVal($item_semaforo['longitud'], $item_semaforo['latitud']);
             if($id == 0){
                 $id_horario = $this->SelHorario($item_semaforo['inicio_suspencion'], $item_semaforo['fin_suspencion']);
-                $id_rango = $this->SelRango( $item_semaforo['longitud'], $item_semaforo['latitud']);
                 $id_tiempo_verde = $this->SelTiempoVerde($item_semaforo['tiempo_verde']);
                 $id_tiempo_amarillo = $this->SelTiempoAmarillo($item_semaforo['tiempo_amarillo']);
                 $id_tiempo_rojo = $this->SelTiempoRojo($item_semaforo['tiempo_rojo']);
@@ -272,26 +237,6 @@ class AllController{
             return $id;
         }
     }
-
-    function SelRango($longitud, $latitud){
-        $rango = new Rango();
-
-        $res = $rango->SelectData($longitud, $latitud);
-        if($res->rowCount()){
-            $row = $res->fetch();
-            $id = (int)$row['id'];
-
-            return $id;
-        }else{
-            $item = array('longitud' => $longitud,'latitud' => $latitud);
-            $rango->Insert($item);
-            $res = $rango->SelectData($longitud, $latitud);
-            $row = $res->fetch();
-            $id = (int)$row['id'];
-
-            return $id;
-        }
-    }
     
     function SelRangoVal($longitud, $latitud){
         $rango = new Rango();
@@ -308,7 +253,6 @@ class AllController{
             return $id;
         }
     }
-
 
     function SelTiempoVerde($tiempo){
         $tiempo_verde = new TiempoVerde();
