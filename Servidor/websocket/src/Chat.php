@@ -34,27 +34,42 @@ class Chat implements MessageComponentInterface {
             // Id del area al que entro
             $id = $data->{'objects'}[0]->{'id'};
             //Realizar consulta con id para obtener datos del semaforo y llenar array de semaforo
+			
+			include_once '../../Orion_1.1/API/Models/All.php';
+			include_once '../../Orion_1.1/API/Models/Semaforo.php';
+			
+			$consulta_semaforo = new Semaforo();
+			$all = new All();
+			
+			$res = $consulta_semaforo->selectData($id);
+            $row = $res->fetch();
+            $id_sem = (int)$row['id'];
+            $res= $all->Select($id_sem);
 
-            $semaforo = array(
-                'id' =>  ,
-                'nombre' =>  ,
-                'status' =>  ,
-                'longitud' => ,
-                'latitud' =>  ,
-                'tiempo_inicio' => ,
-                'inicio_suspencion' => ,
-                'fin_suspencion' => ,
-                'tiempo_verde' => ],
-                'tiempo_amarillo' => ,
-                'tiempo_rojo' => ,
-                
-            );
+            if($res->rowCount() == 1){
+                $row = $res->fetch();
 
-            $from->send(json_encode($semaforo));
+				$semaforo = array(
+					'id' => (int)$row['id'],
+                    'nombre' => $row['nombre'],
+                    'status' => (boolean)$row['status'],
+                    'longitud' => (float)$row['longitud'],
+                    'latitud' => (float)$row['latitud'],
+                    'tiempo_inicio' => (int)$row['tiempo_inicio'],
+                    'inicio_suspencion' => (string)$row['inicio_suspencion'],
+                    'fin_suspencion' => (string)$row['fin_suspencion'],
+                    'tiempo_verde' => (int)$row['tiempo_verde'],
+                    'tiempo_amarillo' => (int)$row['tiempo_amarillo'],
+                    'tiempo_rojo' => (int)$row['tiempo_rojo']
+					
+				);
 
-           
+				$from->send(json_encode($semaforo));
+			}else{
+
+            $from->send("false");
             
-
+			}
         }else{
 
             $from->send("false");
