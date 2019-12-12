@@ -20,6 +20,8 @@ map.on('pm:drawend', e => {
 
     coordinates = []
 
+    console.log(JSON.stringify(geojson))
+
 
   }
 });

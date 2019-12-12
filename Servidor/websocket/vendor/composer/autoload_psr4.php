@@ -21,4 +21,8 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'MyApp\\' => array($baseDir . '/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
+    'Amp\\Sql\\Common\\' => array($vendorDir . '/amphp/sql-common/src'),
+    'Amp\\Sql\\' => array($vendorDir . '/amphp/sql/src'),
+    'Amp\\Postgres\\' => array($vendorDir . '/amphp/postgres/src'),
+    'Amp\\' => array($vendorDir . '/amphp/amp/lib'),
 );
