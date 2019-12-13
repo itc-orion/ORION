@@ -21,7 +21,7 @@ public class Localizacion implements LocationListener {
                 while (true) {
                     b = true;
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -46,7 +46,7 @@ public class Localizacion implements LocationListener {
             final String sLongitud = String.valueOf(longitudeGPS);
             b = false;
 
-            mainActivity.webSocket.send("[" + sLongitud + "," + sLatitud + "]");
+            mainActivity.webSocket.send(  sLongitud + "," + sLatitud );
         }
     }
 

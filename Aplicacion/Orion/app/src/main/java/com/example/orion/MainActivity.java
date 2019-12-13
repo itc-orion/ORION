@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
 
     private void iniciaAnimacion() throws InterruptedException {
 
-        String date = df.format(se.getFin_suspencion());
+        String date = df.format(Calendar.getInstance().getTime());
 
         String arr[] = date.split(":");
 
