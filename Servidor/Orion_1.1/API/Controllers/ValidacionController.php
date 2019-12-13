@@ -1,9 +1,19 @@
 <?php
-    include_once 'Controllers/AllController.php';
+include_once 'Controllers/AllController.php';
 
     class ValidacionController{
-
-        function Ins($body){
+        
+        /**
+        * Validacion de los datospara el registro o actualizacion de un semaforo
+        *
+        * analiza el formato y estructura de cada dato del semaforo ingresado exeptuando
+        * la geo-malla y redirige esos datos para su posterio proceso
+        *
+        * @access public
+        * @param array $body contiene todos los datos del semaforo que son ingresados al servidor
+        * @return void 
+        */
+        function Val($body){
             $all = new AllController();
             $array['Errores_Validacion'] = array();
             $valido = true;
@@ -88,6 +98,14 @@
             }
         }
 
+        /**
+        * envia los posibles errores en la validacion de los datos del semaforo
+        *
+        * @access public
+        * @param array $array contiene un arreglo que tiene diferentes mensajes dependiendo de todos los datos del semaforo
+        *              no esten acorde a los que requiere el servidor
+        * @return json envio un mensaje del error en formato json
+        */
         function Error($array){
             header('Content-Type: application/json');
             echo json_encode($array,JSON_UNESCAPED_UNICODE);

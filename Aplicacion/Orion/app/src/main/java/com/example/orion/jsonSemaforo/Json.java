@@ -7,21 +7,21 @@ import java.util.List;
 
 public class Json {
 
-    private List<semaforo> Semaforos;
+    private List<semaforo> semaforo;
 
-    public Json(List<semaforo> Semaforos) {
-        this.Semaforos = Semaforos;
+    public Json(List<semaforo> semaforo) {
+        this.semaforo = semaforo;
     }
 
     public Json() {
     }
 
     public List<semaforo> getSemaforo() {
-        return Semaforos;
+        return semaforo;
     }
 
     public void setSemaforo(List<semaforo> semaforo) {
-        this.Semaforos = semaforo;
+        this.semaforo = semaforo;
     }
 
     public static semaforo parseJSON(String response){

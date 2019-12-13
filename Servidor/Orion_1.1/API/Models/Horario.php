@@ -1,43 +1,34 @@
 <?php
-
 include_once 'Config/Conexion.php';
 
-class Horario extends DB{
+    class Horario extends DB{
 
-    function Show(){
-        $query = $this->connect()->query('SELECT * FROM horarios');
-        return $query;
+        /**
+        * consulta de la clave primaria del horario a traves de los datos 
+        *
+        * @access public
+        * @param string $inicio_suspencion,  $fin_suspencion hora de inicio y fin de suspencion del semaforo.
+        *               con formato 00:00:00
+        * @return $query envia el resultado de la consulta
+        */
+        function SelectData($inicio_suspencion, $fin_suspencion){
+            $query = $this->connect()->prepare('SELECT * FROM horarios WHERE inicio_suspencion= :inicio_suspencion AND fin_suspencion= :fin_suspencion');
+            $query->execute(['inicio_suspencion' => $inicio_suspencion, 'fin_suspencion' => $fin_suspencion]);
+            return $query;
+        }
+
+        /**
+        * registro del horario de suspencion del semaforo
+        *
+        * @access public
+        * @param array $horario arreglo que contiene la hora de inicio y fin de suspencion del semaforo
+        *              con formato 00:00:00
+        * @return $query retorna el resultado de la sentencia
+        */
+        function Insert($horario){
+            $query = $this->connect()->prepare('INSERT INTO horarios (inicio_suspencion, fin_suspencion) VALUES (:inicio_suspencion, :fin_suspencion)');
+            $query->execute(['inicio_suspencion' => $horario['inicio_suspencion'], 'fin_suspencion' => $horario['fin_suspencion']]);
+            return $query;
+        }
     }
-
-    function SelectData($inicio_suspencion, $fin_suspencion){
-        $query = $this->connect()->prepare('SELECT * FROM horarios WHERE inicio_suspencion= :inicio_suspencion AND fin_suspencion= :fin_suspencion');
-        $query->execute(['inicio_suspencion' => $inicio_suspencion, 'fin_suspencion' => $fin_suspencion]);
-        return $query;
-    }
-
-    function Select($id){
-        $query = $this->connect()->prepare('SELECT * FROM horarios WHERE id= :id');
-        $query->execute(['id' => $id]);
-        return $query;
-    }
-
-    function Insert($horario){
-        $query = $this->connect()->prepare('INSERT INTO horarios (inicio_suspencion, fin_suspencion) VALUES (:inicio_suspencion, :fin_suspencion)');
-        $query->execute(['inicio_suspencion' => $horario['inicio_suspencion'], 'fin_suspencion' => $horario['fin_suspencion']]);
-        return $query;
-    }
-
-    function Update($horario,$id){
-        $query = $this->connect()->prepare('UPDATE horarios SET inicio_suspencion= :inicio_suspencion, fin_suspencion= :fin_suspencion WHERE id= :id');
-        $query->execute(['id' => $id, 'inicio_suspencion' => $horario['inicio_suspencion'], 'fin_suspencion' => $horario['fin_suspencion']]);
-        return $query;
-    }
-
-    function Delete($id){
-        $query = $this->connect()->prepare('DELETE FROM horarios WHERE id= :id');
-        $query->execute(['id' => $id]);
-        return $query;
-    }
-}
-
 ?>
