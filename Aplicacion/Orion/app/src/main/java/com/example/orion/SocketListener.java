@@ -56,12 +56,12 @@ public class SocketListener extends WebSocketListener {
                     activity.sc.setVisibility(View.INVISIBLE);
                     activity.color.setVisibility(View.VISIBLE);
 
-                    /*Gson gson = new GsonBuilder().create();
+                    Gson gson = new GsonBuilder().create();
                     Json j = gson.fromJson(text, Json.class);
 
-                    activity.iniciaTodo(j.getSemaforo().get(0));*/
+                    activity.iniciaTodo(j.getSemaforo().get(0));
 
-                    activity.iniciaTodo(new semaforo("05:30:00", 38, 3, 19, 0));
+                   // activity.iniciaTodo(new semaforo("05:30:00", 38, 3, 19, 0));
                 } else if (text.equals("false") && tf) {
                     activity.thread.interrupt();
                     activity.sc.setVisibility(View.VISIBLE);

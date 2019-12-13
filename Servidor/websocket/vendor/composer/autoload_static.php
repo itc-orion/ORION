@@ -8,10 +8,14 @@ class ComposerStaticInite0852aeacd78b325b55f4c453a90a05f
 {
     public static $files = array (
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+        'e8aa6e4b5a1db2f56ae794f1505391a8' => __DIR__ . '/..' . '/amphp/amp/lib/functions.php',
+        '76cd0796156622033397994f25b0d8fc' => __DIR__ . '/..' . '/amphp/amp/lib/Internal/functions.php',
         '972fda704d680a3a53c68e34e193cb22' => __DIR__ . '/..' . '/react/promise-timer/src/functions_include.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '4da7a33b8388a4c58699a4f48894fced' => __DIR__ . '/..' . '/amphp/postgres/src/functions.php',
+        '33e77b43ad8185a87488d9c8e2900fb0' => __DIR__ . '/..' . '/amphp/postgres/src/Internal/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -44,6 +48,13 @@ class ComposerStaticInite0852aeacd78b325b55f4c453a90a05f
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
+        ),
+        'A' => 
+        array (
+            'Amp\\Sql\\Common\\' => 15,
+            'Amp\\Sql\\' => 8,
+            'Amp\\Postgres\\' => 13,
+            'Amp\\' => 4,
         ),
     );
 
@@ -107,6 +118,22 @@ class ComposerStaticInite0852aeacd78b325b55f4c453a90a05f
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Amp\\Sql\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/sql-common/src',
+        ),
+        'Amp\\Sql\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/sql/src',
+        ),
+        'Amp\\Postgres\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/postgres/src',
+        ),
+        'Amp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amphp/amp/lib',
         ),
     );
 
