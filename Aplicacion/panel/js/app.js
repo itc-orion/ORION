@@ -19,8 +19,8 @@ form.addEventListener('click', function (e) {
             "longitud": parseFloat(campos[1].value),
             "latitud": parseFloat(campos[0].value),
             "tiempo_inicio": 0,
-            "inicio_suspencion": campos[6].value,
-            "fin_suspencion": campos[7].value,
+            "inicio_suspencion": campos[7].value,
+            "fin_suspencion": campos[6].value,
             "tiempo_verde": parseInt(campos[3].value),
             "tiempo_amarillo": parseInt(campos[4].value),
             "tiempo_rojo": parseInt(campos[5].value)

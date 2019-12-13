@@ -7,25 +7,6 @@
       coordinates.push([e.latlng.lng, e.latlng.lat]);
     });  
   });
-<<<<<<< HEAD
-=======
-});
-
-
-//Evento que se ejecuta cada vez que se termina de dibujar en el mapa
-map.on('pm:drawend', e => {
-
-  //Cada vez que se dibuja un poligono
-  if (e.shape == "Polygon") {
-    geojson['type'] = 'Polygon';
-    coordinates.push(coordinates[0])
-    geojson['coordinates'] = [coordinates]
-
-    coordinates = []
-
-    console.log(JSON.stringify(geojson))
-
->>>>>>> f842df9b921e107dcc641a65a346d0924c9bda10
 
 //Evento que se ejecuta cada vez que selecciona un elemento a dibujar
   map.on('pm:drawstart', e => {
@@ -140,6 +121,8 @@ HttpRequestGET(urlGET).then(function(myJson)
 
       var marcador = new L.marker([data.Semaforos[i].latitud, data.Semaforos[i].longitud]).on('click', onClick)
       marcador.addTo(map)
+      marcador._icon.src=trafficlight_icon;
+
 
     }
   }
