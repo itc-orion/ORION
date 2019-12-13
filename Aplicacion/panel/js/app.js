@@ -1,10 +1,5 @@
 let geojson={};
 
-var dominio = "https://32d1dd76.ngrok.io"
-var urlPOST = dominio+"/Orion_1.1/API/All/Create"
-var urlGET = dominio+"/Orion_1.1/API/All/Show"
-var url2 = dominio+"/Orion_1.1/API/All/Select"
-var url3 = dominio+"/Orion_1.1/API/All/Delete"
 
 
 var form = document.getElementById('enviar');
@@ -49,14 +44,7 @@ form.addEventListener('click', function (e) {
 
 })
 
-view.addEventListener('click', function(){
-    if(this.checked == true){
-        Streetview();
-    }else{
-        Mapview();
-    }
-    
-})
+
 
 del.addEventListener('click', function(){
     var datos = {

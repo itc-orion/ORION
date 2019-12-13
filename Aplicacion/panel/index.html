@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+<!-- Librerias externas-->
+
+    <!-- Libreria leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <!-- Libreria leaflet.pm -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
+        <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+    <!-- Libreria esri leaflet -->
+        <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+        <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+    <!-- Libreria Leaflet.fullscreen -->
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <!-- Libreria Leaflet basemaps -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps.css">
+        <script src="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps-min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" integrity="sha256-p+PhKJEDqN9f5n04H+wNtGonV2pTXGmB4Zr7PZ3lJ/w=" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" integrity="sha256-xzc5zu2WQtJgvCwRGTXiHny3T+KQZa6tQF24RVDRlL0=" crossorigin="anonymous"></script>
+
+<!-- Estilos locales-->
     <link rel="stylesheet" href="css/panel.css">
-    <link rel="stylesheet" href="css/toggle.css">
 
-    <!--Librerias externas-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
-    <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+<!-- Icono de la pagina-->
+    <link rel="icon" href="img/orion.png" type="image/png">
 
+<!-- Titulo de la pagina-->
     <title>ORION</title>
 
+
 </head>
+
 <body>
-
+    <!-- Cabecera de la pagina -->
     <header>
-        <label id="switchBtn">
-            <input id="view" type="checkbox">
-            <div class="slide round">Vista satelital</div>
-        </label>
-
-        <div>
-            <input type="text" placeholder="Buscar" id = "barra">
-        </div>
-
         <div id = "orion">ORION</div>
-
     </header>
-
+    <!-- Contenedor del mapa -->
     <div>
-        <div id="map">
-    </div>    
+        <div id="map"></div>    
 
         <div id="form">
             <div id="primero"><input class = "campo" type="text" name="latitud" placeholder="Latitud"><input class = "campo" type="text" name="longitud" placeholder="Longitud">
@@ -61,11 +71,12 @@
 </body>
 
 
-<!--Scripts-->
-<script src="js/app.js"></script>
-<script src="js/request.js"></script>
-<script src="js/map/map_configuraton.js"></script>
-<script src="js/map/map_init.js"></script>
-<script src="js/map/map_events.js"></script>
+<!--Scripts Locales-->
+    <script src="js/app.js"></script>
+    <script src="js/request.js"></script>
+    <script src="js/global_variables.js"></script>
+    <script src="js/map/map_configuraton.js"></script>
+    <script src="js/map/map_init.js"></script>
+    <script src="js/map/map_events.js"></script>
 
 </html>
