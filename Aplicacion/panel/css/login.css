@@ -1,0 +1,105 @@
+/*
+Colores:
+Primary: #7456F1
+light primary: rgb(160, 153, 187)
+white: #f2f2f2
+divider: #B6B6B6
+error: #D32F2F
+*/
+
+body{
+    margin: 0%;
+}
+
+.wrap{
+    width: 90%;
+    max-width: 500px;
+    padding: 40px;
+    margin: auto;
+    background: #fff;
+    box-shadow: 0px 0px 3px grey;
+}
+
+.contenedor{
+    width: 100%;
+    color: #fff;
+    padding: 50px;
+}
+
+.formulario{
+    width: 100%;
+    margin: auto;
+}
+
+.input-group{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+input[type="email"], input[type="password"]{
+    font-family: "Roboto";
+    font-size: 26px;
+    color: #7456F1;
+    width: 94%;
+    outline: none;
+    padding: 15px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid rgb(160, 153, 187);
+}
+
+input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active{
+    outline: none;
+    border-bottom: 2px solid #7456F1;
+}
+
+input.error{
+    border-bottom: 2px solid #D32F2F;
+}
+
+input.error+label{
+    color: #D32F2F;
+}
+
+.label{
+    font-family: "Roboto";
+    font-weight: 400;
+    color: #7456F1;
+    position: absolute;
+    top: 16px;
+    left: 0;
+    font-size: 16px;
+    line-height: 16px;
+    margin-left: 16px;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease ;
+}
+
+.active{
+    top:-12px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #B6B6B6;
+}
+
+input[type="submit"]{
+    background: #7456F1;
+    border-radius: 1px;
+    border: 2px solid #f2f2f2;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 15px;
+    width: 100%;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease ;
+}
+
+input[type="submit"]:hover{
+    background: rgb(124, 105, 202);
+}

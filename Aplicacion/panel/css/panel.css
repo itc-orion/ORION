@@ -2,17 +2,6 @@ body{
     margin: 0%;
 }
 
-header{
-    height: 50px;
-    background: #7456F1;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-}
-
-
-
 #orion{
     margin-left: 15px;
     height: 30px;
@@ -73,7 +62,8 @@ body > div{
 }
 
 div > button{
-
+    font-family: "Roboto";
+    font-weight: 400;
     height: 50%;
     width: 30%;
     border-radius: 4px;
@@ -91,6 +81,8 @@ div > button:hover{
 }
 
 input{
+    font-family: "Roboto";
+    font-weight: 400;
     width: 95px;
     height: 18px;
     margin-left: 20px;
