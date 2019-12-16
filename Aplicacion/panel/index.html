@@ -1,72 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Librerias externas-->
+    <!-- Librerias externas-->
 
     <!-- Libreria leaflet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     <!-- Libreria leaflet.pm -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
-        <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
+    <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
     <!-- Libreria esri leaflet -->
-        <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
-        <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+    <script
+        src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
     <!-- Libreria Leaflet.fullscreen -->
-        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
     <!-- Libreria Leaflet basemaps -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps.css">
-        <script src="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps-min.js"></script>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" integrity="sha256-p+PhKJEDqN9f5n04H+wNtGonV2pTXGmB4Zr7PZ3lJ/w=" crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" integrity="sha256-xzc5zu2WQtJgvCwRGTXiHny3T+KQZa6tQF24RVDRlL0=" crossorigin="anonymous"></script>
+    <!--Libreria noty-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"
+        integrity="sha256-p+PhKJEDqN9f5n04H+wNtGonV2pTXGmB4Zr7PZ3lJ/w=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"
+        integrity="sha256-xzc5zu2WQtJgvCwRGTXiHny3T+KQZa6tQF24RVDRlL0=" crossorigin="anonymous"></script>
 
     <!--Include.js-->
-        <script src="https://morgan3d.github.io/include.js/include.min.js"></script>
+    <script src="https://morgan3d.github.io/include.js/include.min.js"></script>
 
-<!-- Funte Roboto Material Design-->
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap" rel="stylesheet">
+    <!-- Funte Roboto Material Design-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap" rel="stylesheet">
 
-<!-- Estilos locales-->
+    <!--Page.js-->
+    <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
+
+    <!-- Estilos locales-->
     <link rel="stylesheet" href="css/panel.css">
 
-<!-- Icono de la pagina-->
+    <!-- Icono de la pagina-->
     <link rel="icon" href="img/orion.png" type="image/png">
 
-<!-- Titulo de la pagina-->
+    <!-- Titulo de la pagina-->
     <title>ORION</title>
 
 
 </head>
 
 <body>
+
     <!-- Cabecera de la pagina -->
     <include src="header.html"></include>
 
     <!-- Contenedor del mapa -->
     <div>
-        <div id="map"></div>    
+        <div id="map"></div>
 
+        <!--id obligatiorio para uso de app.js-->
         <div id="form">
-            <div id="primero"><input class = "campo" type="text" name="latitud" placeholder="Latitud"><input class = "campo" type="text" name="longitud" placeholder="Longitud">
-        </div>
-            
-            <div id = "segundo">
-                <input id = "nombre" class = "campo" type="text" name="nombre" placeholder="Nombre">
-                <input class = "campo" type="text" name="verde" placeholder="Tiempo verde">
-                <input class = "campo" type="text" name="amarillo" placeholder="Tiempo amarillo">
-                <input class = "campo" type="text" name="rojo" placeholder="Tiempo rojo">
-                <input class = "campo" type="text" name="inicio" placeholder="Hora de incio">
-                <input class = "campo" type="text" name="suspension" placeholder="Hora de suspensión">
+            <div name="primero"><input class="campo" type="text" name="latitud" placeholder="Latitud"><input
+                    class="campo" type="text" name="longitud" placeholder="Longitud">
             </div>
 
-            <div id="tercero">
+            <div name="segundo">
+                <input id="nombre" class="campo" type="text" name="nombre" placeholder="Nombre">
+                <input class="campo" type="text" name="verde" placeholder="Tiempo verde">
+                <input class="campo" type="text" name="amarillo" placeholder="Tiempo amarillo">
+                <input class="campo" type="text" name="rojo" placeholder="Tiempo rojo">
+                <input class="campo" type="text" name="inicio" placeholder="Hora de incio">
+                <input class="campo" type="text" name="suspension" placeholder="Hora de suspensión">
+            </div>
+
+            <div name="tercero">
                 <button id="enviar" type="submit">Guardar</button>
+                <!--id obligatiorio para uso de app.js-->
                 <button id="eliminar">Eliminar</button>
             </div>
 
@@ -77,11 +91,30 @@
 
 
 <!--Scripts Locales-->
-    <script src="js/app.js"></script>
-    <script src="js/request.js"></script>
-    <script src="js/global_variables.js"></script>
-    <script src="js/map/map_configuraton.js"></script>
-    <script src="js/map/map_init.js"></script>
-    <script src="js/map/map_events.js"></script>
+<script>
+    page("/index.html", index);
+    page("/login.html", login);
+    page();
+
+    function index() {
+        if (typeof (Storage) !== "undefined") {
+            // LocalStorage disponible
+            if(!sessionStorage.getItem("login")){
+                page.redirect("login.html");
+            }
+        } else {
+            // LocalStorage no soportado en este navegador
+        }
+    }
+
+    function login(){}
+
+</script>
+<script src="js/app.js"></script>
+<script src="js/request.js"></script>
+<script src="js/global_variables.js"></script>
+<script src="js/map/map_configuraton.js"></script>
+<script src="js/map/map_init.js"></script>
+<script src="js/map/map_events.js"></script>
 
 </html>

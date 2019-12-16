@@ -25,7 +25,7 @@ body > div{
     flex-wrap: nowrap;
 }
 
-#primero{
+div[name = "primero"]{
     height: 10%;
     padding-top: 30px;
     padding-right: 20px;
@@ -34,7 +34,7 @@ body > div{
     justify-content: space-around;
 }
 
-#segundo{
+div[name="segundo"]{
     height: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #ffffff;  
@@ -46,7 +46,7 @@ body > div{
 
 }
 
-#tercero{
+div[name="tercero"]{
     height: 10%;
     padding-top: 7%;
     display: flex;

@@ -13,6 +13,7 @@
 
     <title>Document</title>
 
+    <!--Definiendo estilos locales para el header para evitar la colision de estilos-->
     <style>
         header {
             height: 50px;
@@ -21,7 +22,7 @@
             flex-wrap: wrap;
             align-items: center;
         }
-        #orion{
+        div[name="orion"]{
             margin-left: 15px;
             height: 30px;
             font-size: 1.6em;
@@ -35,7 +36,7 @@
 </head>
 <body>
     <header>
-        <div id = "orion">ORION</div>
+        <div name = "orion">ORION</div>
     </header>
 </body>
 </html>

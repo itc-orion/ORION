@@ -1,16 +1,13 @@
 let geojson={};
 
-
-
 var form = document.getElementById('enviar');
 var view = document.getElementById('view');
 var del = document.getElementById('eliminar');
 let campos = document.querySelectorAll(".campo")
 
+//funcion constructora de peticion para guardar y actualizar
 form.addEventListener('click', function (e) {
     e.preventDefault();
-
-    console.log("HOLA");
 
     var datos = {
         "semaforo": {
@@ -28,10 +25,6 @@ form.addEventListener('click', function (e) {
         "area": geojson
     };
 
-    console.log(datos);
-
-   
-    console.log("Entro");
     HttpRequestPOST(urlPOST, datos)
     .then(res => {
         alert(res);
@@ -45,7 +38,7 @@ form.addEventListener('click', function (e) {
 })
 
 
-
+//funcion constructora de peticion para eliminar
 del.addEventListener('click', function(){
     var datos = {
         "rango":{

@@ -11,6 +11,7 @@ body{
     margin: 0%;
 }
 
+/*Clase contenedora del formulario*/
 .wrap{
     width: 90%;
     max-width: 500px;
@@ -19,6 +20,7 @@ body{
     background: #fff;
     box-shadow: 0px 0px 3px grey;
 }
+
 
 .contenedor{
     width: 100%;
@@ -36,31 +38,36 @@ body{
     margin-bottom: 40px;
 }
 
+/*Estilos que se aplican a todos los input de tipo email y password*/
 input[type="email"], input[type="password"]{
     font-family: "Roboto";
     font-size: 26px;
-    color: #7456F1;
+    color: #7456F1; /*primary*/
     width: 94%;
     outline: none;
     padding: 15px;
     background: none;
     border: none;
-    border-bottom: 2px solid rgb(160, 153, 187);
+    border-bottom: 2px solid rgb(160, 153, 187); /*light primary*/
 }
 
+/*Estilos que se aplican a los input cuando son seleccionados*/
 input[type="email"]:focus, input[type="email"]:active, input[type="password"]:focus, input[type="password"]:active{
     outline: none;
     border-bottom: 2px solid #7456F1;
 }
 
+/*Estilo que se aplica a la clase error para los input*/
 input.error{
     border-bottom: 2px solid #D32F2F;
 }
 
+/*Estilo de error aplicado a los label que esten dentro de un input con clase error*/
 input.error+label{
     color: #D32F2F;
 }
 
+/*Estilo aplicado a todas la clase label*/
 .label{
     font-family: "Roboto";
     font-weight: 400;
@@ -83,6 +90,7 @@ input.error+label{
     color: #B6B6B6;
 }
 
+/*Estilos aplicados al boton de enviar*/
 input[type="submit"]{
     background: #7456F1;
     border-radius: 1px;
