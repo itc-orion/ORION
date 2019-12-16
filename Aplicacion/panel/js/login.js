@@ -33,7 +33,7 @@ function Sesion(){
                 e.preventDefault();
             } else {
                 e.preventDefault();
-                if (elementos[0].value == "16680152@cuautla.tecnm.mx" && elementos[1].value == "TECNMcuautla2019") {
+                if (elementos[0].value == "sistemadesemaforosdigitales@gmail.com" && elementos[1].value == "tecnmcuautla") {
                     if (typeof(Storage) !== "undefined") {
                         //Si los datos son correctos almacena una bandera en sessionStorage
                         sessionStorage.setItem("login", true);
