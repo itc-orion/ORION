@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Librerias externas-->
+   
+<!-- Librerias externas-->
 
-    <!-- Libreria leaflet -->
+    <!-- Libreria MUI -->
+    <link href="//cdn.muicss.com/mui-latest/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-latest/js/mui.min.js"></script>
+    <!-- Libreria Cleave -->
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.5.3/dist/cleave.min.js"></script>
+     <!-- Libreria leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     <!-- Libreria leaflet.pm -->
@@ -15,25 +21,27 @@
     <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
     <!-- Libreria esri leaflet -->
     <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
-    <script
-        src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
     <!-- Libreria Leaflet.fullscreen -->
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
-        rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
     <!-- Libreria Leaflet basemaps -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps.css">
     <script src="https://cdn.jsdelivr.net/npm/leaflet-basemaps@0.3.4/L.Control.Basemaps-min.js"></script>
+    <!-- Libreria Leaflet Sidebar-->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.2.2/js/leaflet-sidebar.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.2.2/css/leaflet-sidebar.css">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.68.0/L.Control.Locate.css" integrity="sha256-tjHShyY8NIWnHm52Sl85mBCNJPPG6lJA0WDX8E8CdKE=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.68.0/L.Control.Locate.min.js" integrity="sha256-GOkPlT2OTydV64Pl54eR/Jtj1wyaVX4phS+yX3ggdm8=" crossorigin="anonymous"></script>
+    
+
 
     <!--Libreria noty-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"
-        integrity="sha256-p+PhKJEDqN9f5n04H+wNtGonV2pTXGmB4Zr7PZ3lJ/w=" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"
-        integrity="sha256-xzc5zu2WQtJgvCwRGTXiHny3T+KQZa6tQF24RVDRlL0=" crossorigin="anonymous"></script>
-
-    <!--Include.js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" integrity="sha256-p+PhKJEDqN9f5n04H+wNtGonV2pTXGmB4Zr7PZ3lJ/w=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" integrity="sha256-xzc5zu2WQtJgvCwRGTXiHny3T+KQZa6tQF24RVDRlL0=" crossorigin="anonymous"></script>
+    <!--Libreria Include.js-->
     <script src="https://morgan3d.github.io/include.js/include.min.js"></script>
 
     <!-- Funte Roboto Material Design-->
@@ -41,6 +49,12 @@
 
     <!--Page.js-->
     <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
+
+    <!--Font awesome-->
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 
     <!-- Estilos locales-->
     <link rel="stylesheet" href="css/panel.css">
@@ -51,7 +65,7 @@
     <!-- Titulo de la pagina-->
     <title>ORION</title>
 
-
+  
 </head>
 
 <body>
@@ -59,24 +73,85 @@
     <!-- Cabecera de la pagina -->
     <include src="header.html"></include>
 
-    <!-- Contenedor del mapa -->
-    <div>
-        <div id="map"></div>
 
+     <!-- optionally define the sidebar content via HTML markup -->
+     <div id="sidebar" class="leaflet-sidebar collapsed">
+
+
+        <!-- nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <!-- top tabs -->
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+
+            </ul>
+
+    
+            <!-- bottom tabs -->
+            <ul role="tablist">
+                <li><a href=""><i class="fa fa-github"></i></a></li>
+
+            </ul>
+            
+            
+        </div>
+    
+        <!-- panel content -->
+        <div class="leaflet-sidebar-content">
+
+            
+    
+            <div class="leaflet-sidebar-pane" id="home">
+
+                <h1 class="leaflet-sidebar-header">
+                    Registro de semaforos
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                
+                
         <!--id obligatiorio para uso de app.js-->
         <div id="form">
+
+
+            
 
             <div name="primero" id="primero"><input class="campo" type="text" name="latitud" placeholder="Latitud"><input
                     class="campo" type="text" name="longitud" placeholder="Longitud">
             </div>
 
             <div name="segundo" id="segundo">
-                <input id="nombre" class="campo" type="text" name="nombre" placeholder="Nombre">
-                <input class="campo" type="text" name="verde" placeholder="Tiempo verde">
-                <input class="campo" type="text" name="amarillo" placeholder="Tiempo amarillo">
-                <input class="campo" type="text" name="rojo" placeholder="Tiempo rojo">
-                <input class="campo" type="text" name="inicio" placeholder="Hora de incio">
-                <input class="campo" type="text" name="suspension" placeholder="Hora de suspensión">
+
+                <div class="mui-textfield">
+                    <input id="nombre" class="campo" type="text" name="nombre">
+                    <label>Nombre</label>
+                </div>
+
+                <div class="mui-textfield">
+                    <input class="campo" type="number" name="verde" placeholder="s">
+                    <label>Tiempo verde</label>
+                </div>
+
+                <div class="mui-textfield">
+                    <input class="campo" type="number" name="amarillo" placeholder="s">
+                    <label>Tiempo amarillo</label>
+                </div>
+
+                <div class="mui-textfield">
+                    <input class="campo" type="number" name="rojo" placeholder="s">
+                    <label>Tiempo rojo</label>
+                </div>
+
+                <div class="mui-textfield">
+                    <input class="campo format" type="text" name="inicio" placeholder="hh:mm:ss">
+                    <label>hora de inicio</label>
+                </div>
+
+                <div class="mui-textfield">
+                    <input id="fin" class="campo format" type="text" name="suspension" placeholder="hh:mm:ss">
+                    <label>hora suspension</label>
+                </div>
+
             </div>
 
             <div name="tercero" id="tercero">
@@ -86,7 +161,33 @@
             </div>
 
         </div>
+                 
+            </div>
+
+
+        </div>
+
+
+       
+
+
+
     </div>
+    
+    
+
+
+
+    <!-- Contenedor del mapa -->
+    <div>
+        <div id="map"></div>
+    </div>
+
+
+
+
+   
+    
 
 </body>
 
@@ -110,12 +211,31 @@
 
     function login(){}
 
+
+  
+
+    var format_time= new Cleave('.format', {
+    time: true,
+    timePattern: ['h', 'm', 's']
+    });
+
+    new Cleave('#fin', {
+    time: true,
+    timePattern: ['h', 'm', 's']
+    });
+
+
 </script>
+
+
+
 <script src="js/app.js"></script>
 <script src="js/request.js"></script>
 <script src="js/global_variables.js"></script>
 <script src="js/map/map_configuraton.js"></script>
-<script src="js/map/map_init.js"></script>
+<script src="js/map/sidebar.js"></script>
 <script src="js/map/map_events.js"></script>
+
+
 
 </html>

@@ -22,6 +22,16 @@
       coordinates.push(coordinates[0])
       geojson['coordinates'] = [coordinates]
       coordinates = []
+      sidebar.open('home')
+
+      new Noty({
+        text: 'Excelente, ahora registra los datos del semaforo',
+        layout: 'topCenter',
+        theme: 'metroui',
+        timeout: 2500,
+        progressBar: true,
+      }).show();
+
     }
   });
 

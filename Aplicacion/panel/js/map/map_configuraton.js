@@ -52,3 +52,14 @@
   var searchControl = new L.esri.Controls.Geosearch({
     position: 'topright'
   }).addTo(map);
+
+
+var lc = L.control.locate({
+  drawCircle: false,
+  drawMarker: false,
+  flyTo: true,
+  locateOptions: {
+    maxZoom: 20
+  }
+
+}).addTo(map);

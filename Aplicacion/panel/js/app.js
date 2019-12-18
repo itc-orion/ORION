@@ -9,6 +9,24 @@ let campos = document.querySelectorAll(".campo")
 form.addEventListener('click', function (e) {
     e.preventDefault();
 
+
+
+    let data = document.getElementById("primero")
+     
+   
+    
+    if(data.childNodes[0].value=="" && data.childNodes[1].value==""){
+
+        new Noty({
+            text: 'Para registrar un semaforo, primero debes colocarlo en el mapa',
+            layout: 'topCenter',
+            theme: 'metroui',
+            timeout: 2500,
+            progressBar: true,
+          }).show();
+
+    }else{
+
     var datos = {
         "semaforo": {
             "nombre": campos[2].value + "",
@@ -35,6 +53,8 @@ form.addEventListener('click', function (e) {
         campos[i].value = ""
    }
 
+        }
+
 })
 
 
@@ -51,3 +71,7 @@ del.addEventListener('click', function(){
         alert(res);
     })
 })
+
+
+
+ 
