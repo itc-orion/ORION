@@ -13,7 +13,7 @@ include_once 'Config/Conexion.php';
         * @return $query envia el resultado de la consulta espesifica
         */
         function Select($item){
-            $query = $this->connect()->prepare('SELECT * FROM usuario WHERE correo= :correo AND contrasena= :contrasena');
+            $query = $this->connect()->prepare('SELECT * FROM usuarios WHERE correo= :correo AND contrasena= :contrasena');
             $query->execute(['correo' => $item['correo'], 'contrasena' => $item['contraseña']]);
             return $query;
         }

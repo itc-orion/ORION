@@ -17,11 +17,10 @@ include_once 'Models/Usuario.php';
             $usuario = new Usuario();
 
             $res= $usuario->Select($item);
-
-            if(!$res){
-                $this->Error();
-            }else{
+            if($res->rowCount() == 1){
                 $this->Exito();
+            }else{
+                $this->Error();
             }
         }
 
