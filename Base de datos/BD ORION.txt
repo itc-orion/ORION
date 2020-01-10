@@ -1,14 +1,14 @@
 
-drop database orion;
-create database orion;
-use orion;
+DROP DATABASE orion;
+CREATE DATABASE orion;
+USE orion;
 
 CREATE TABLE horarios (id SERIAL NOT NULL PRIMARY KEY, inicio_suspencion TIME, fin_suspencion TIME);
 CREATE TABLE rangos (id SERIAL NOT NULL PRIMARY KEY, longitud DECIMAL(35,25), latitud DECIMAL(35,25));
 CREATE TABLE tiempos_verde (id SERIAL NOT NULL PRIMARY KEY, tiempo_verde INT);
 CREATE TABLE tiempos_amarillo (id SERIAL NOT NULL PRIMARY KEY, tiempo_amarillo INT);
 CREATE TABLE tiempos_rojo (id SERIAL NOT NULL PRIMARY KEY, tiempo_rojo INT);
-CREATE TABLE semaforos (id SERIAL NOT NULL PRIMARY KEY, nombre varchar(15), status BOOLEAN,  tiempo_inicio integer, id_horario INT, id_rango INT, id_tverde INT, id_tamarillo INT, id_trojo INT, fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE semaforos (id SERIAL NOT NULL PRIMARY KEY, nombre varchar(15), status BOOLEAN,  tiempo_inicio INT, id_horario INT, id_rango INT, id_tverde INT, id_tamarillo INT, id_trojo INT, fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
 
 ALTER TABLE semaforos ADD FOREIGN KEY(id_horario) REFERENCES horarios(id) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE semaforos ADD FOREIGN KEY(id_rango) REFERENCES rangos(id) ON DELETE CASCADE ON UPDATE CASCADE;

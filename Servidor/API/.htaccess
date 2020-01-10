@@ -1,0 +1,10 @@
+#es la linea donde le decimos a Apache que queremos sobre escribir las URLs para crear URLs amigables.
+RewriteEngine on 
+
+# Si la ruta no es un archivo existente, ni una carpeta
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Reescribe al index, tomado la url base asta donde se encuentra el index
+# y el establecer una url amigable para ingresar a lasd funciones del servidor
+RewriteRule ^(.+?)$ index.php?url=$1 [QSA,L]
